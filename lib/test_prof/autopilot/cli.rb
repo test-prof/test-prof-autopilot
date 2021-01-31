@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "optparse"
+require "test_prof/autopilot/runner"
 
 module TestProf
   module Autopilot
@@ -16,7 +17,7 @@ module TestProf
 
         raise "Plan #{plan_path} doesn't exist" unless File.file?(plan_path)
 
-        # TODO: Invoke runner
+        Runner.invoke(plan_path, command)
       end
 
       private
