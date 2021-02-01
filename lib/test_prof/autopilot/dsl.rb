@@ -1,17 +1,30 @@
+# frozen_string_literal: true
+
+require "test_prof/autopilot/profiling_executor"
+
 module TestProf
   module Autopilot
     module Dsl
       def run(profiler, **options)
-        raise NotImplementedError
+        executor = ProfilingExecutor.new(profiler, options).start
+
+        @report = executor.report
       end
 
-      def info
-        raise NotImplementedError
+      def info(printable_object = nil)
+        return Runner.log "Specify data to print: 'report'" if printable_object.nil?
+
+        printable_object.print
       end
 
-      def method_missing(method, *args)
-        Runner.log "Sorry, '#{method}' instruction is not supported"
-        Runner.log "Look to supported instructions: 'run', 'info'"
+      def method_missing(method, *_args)
+        Runner.log(
+          <<~MSG
+            '#{method}' instruction is not supported.
+
+            Look to supported instructions: 'run', 'info'.
+          MSG
+        )
       end
     end
   end

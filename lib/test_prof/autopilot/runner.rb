@@ -8,6 +8,8 @@ module TestProf
     class Runner
       prepend Dsl
 
+      attr_reader :report
+
       class << self
         include Logging
 
@@ -23,15 +25,13 @@ module TestProf
       class Configuration
         attr_accessor :plan_path,
           :command,
-          :output,
-          :output_dir
+          :output
 
         def initialize(plan_path, command)
           @plan_path = plan_path
           @command = command
 
           @output = $stdout
-          @output_dir = "tmp/test_prof_autopilot"
         end
       end
     end

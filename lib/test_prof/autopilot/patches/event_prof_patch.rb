@@ -1,4 +1,4 @@
-require "test-prof"
+# frozen_string_literal: true
 
 module TestProf
   module Autopilot
