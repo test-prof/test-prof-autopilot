@@ -35,16 +35,21 @@ module TestProf
       private
 
       def validate_profiler!
-        return if PROFILERS_REPORTS.key?(@profiler)
+        unless PROFILERS_REPORTS.key?(@profiler)
+          raise ArgumentError, "Unknown profiler: #{@profiler}. Valid providers: #{PROFILERS_REPORTS.keys.join(", ")}"
+        end
 
-        raise ArgumentError, "Unknown profiler: #{@profiler}. Valid providers: #{PROFILERS_REPORTS.keys.join(", ")}"
+        if @profiler == :event_prof && @options[:event].nil?
+          raise ArgumentError, "'event' option is required for '#{@profiler}' profiler"
+        end
       end
 
       def execute
         env = build_env
+        command = build_command
 
         @success =
-          Open3.popen2e(env, Runner.config.command) do |_stdin, stdout_and_stderr, wait_thr|
+          Open3.popen2e(env, command) do |_stdin, stdout_and_stderr, wait_thr|
             while (line = stdout_and_stderr.gets)
               Logging.log line
             end
@@ -56,9 +61,17 @@ module TestProf
       def build_env
         env = {}
 
-        env["EVENT_PROF"] = @options[:event] if @profiler == :event_prof && @options[:event]
+        env["EVENT_PROF"] = @options[:event] if @profiler == :event_prof
         env["FPROF"] = "1" if @profiler == :factory_prof
+        env["SAMPLE"] = @options[:sample] if @options[:sample]
+
         env
+      end
+
+      def build_command
+        return Runner.config.command if @options[:paths].nil?
+
+        "#{Runner.config.command} #{@options[:paths]}"
       end
 
       def build_report
