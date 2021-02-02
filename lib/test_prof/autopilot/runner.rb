@@ -11,8 +11,6 @@ module TestProf
       attr_reader :report
 
       class << self
-        include Logging
-
         attr_reader :config
 
         def invoke(plan_path, command)

@@ -41,7 +41,7 @@ module TestProf
         @success =
           Open3.popen2e(env, Runner.config.command) do |_stdin, stdout_and_stderr, wait_thr|
             while (line = stdout_and_stderr.gets)
-              Runner.log line
+              Logging.log line
             end
 
             wait_thr.value.success?

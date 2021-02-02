@@ -12,13 +12,13 @@ module TestProf
       end
 
       def info(printable_object = nil)
-        return Runner.log "Specify data to print: 'report'" if printable_object.nil?
+        return Logging.log "Specify data to print: 'report'" if printable_object.nil?
 
         printable_object.print
       end
 
       def method_missing(method, *_args)
-        Runner.log(
+        Logging.log(
           <<~MSG
             '#{method}' instruction is not supported.
 

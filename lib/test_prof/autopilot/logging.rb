@@ -6,6 +6,8 @@ module TestProf
       def log(message)
         Runner.config.output.puts(message)
       end
+
+      module_function :log
     end
   end
 end
