@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 require "open3"
+require "test_prof/autopilot/event_prof/report"
+require "test_prof/autopilot/factory_prof/report"
 
 module TestProf
   module Autopilot
     class ProfilingExecutor
-      PROFILERS = %i[event_prof factory_prof].freeze
+      PROFILERS_REPORTS = {
+        event_prof: "EventProf::Report",
+        factory_prof: "FactoryProf::Report"
+      }.freeze
 
       attr_accessor :profiler, :options
       attr_reader :report, :success
@@ -22,7 +27,7 @@ module TestProf
         validate_profiler!
 
         execute
-        generate_report if success?
+        build_report if success?
 
         self
       end
@@ -30,9 +35,9 @@ module TestProf
       private
 
       def validate_profiler!
-        return if PROFILERS.include?(@profiler)
+        return if PROFILERS_REPORTS.key?(@profiler)
 
-        raise ArgumentError, "Unknown profiler: #{@profiler}. Valid providers: #{PROFILERS.join(", ")}"
+        raise ArgumentError, "Unknown profiler: #{@profiler}. Valid providers: #{PROFILERS_REPORTS.keys.join(", ")}"
       end
 
       def execute
@@ -56,7 +61,8 @@ module TestProf
         env
       end
 
-      def generate_report
+      def build_report
+        @report = ::TestProf::Autopilot.const_get(PROFILERS_REPORTS[profiler]).build
       end
     end
   end
