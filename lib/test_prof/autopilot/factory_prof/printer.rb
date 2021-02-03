@@ -6,8 +6,13 @@ module TestProf
   module Autopilot
     module FactoryProf
       module Printer
+        class PrinterError < StandardError; end
+
         def print_report(report)
           result = report.raw_report
+
+          raise PrinterError, result["error"] if result["error"]
+
           msgs = []
 
           msgs <<

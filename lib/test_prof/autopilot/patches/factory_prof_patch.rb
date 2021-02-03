@@ -4,13 +4,16 @@ module TestProf
   module Autopilot
     module Patches
       module FactoryProfPatch
+        ARTIFACT_DIR = "tmp/test_prof_autopilot"
+        ARTIFACT_FILE = "factory_prof_report.json"
+
         def patch
           TestProf::FactoryProf::Printers::Simple.module_eval do
             def self.dump(result)
               profiler_hash =
                 if result.raw_stats == {}
                   {
-                    error_message: "No factories detected"
+                    error: "No factories detected"
                   }
                 else
                   {
@@ -22,8 +25,8 @@ module TestProf
                   }
                 end
 
-              dir_path = FileUtils.mkdir_p("tmp/test_prof_autopilot")[0]
-              json_path = "#{dir_path}/factory_prof_report.json"
+              dir_path = FileUtils.mkdir_p(ARTIFACT_DIR)[0]
+              json_path = "#{dir_path}/#{ARTIFACT_FILE}"
 
               File.write(json_path, JSON.generate(profiler_hash))
             end

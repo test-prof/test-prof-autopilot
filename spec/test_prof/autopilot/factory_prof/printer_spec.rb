@@ -57,5 +57,13 @@ describe TestProf::Autopilot::FactoryProf::Printer do
 
       subject.print_report(report)
     end
+
+    context "when raw data includes error" do
+      let(:raw_report) { {"error" => "No factories detected"} }
+
+      it "raises error" do
+        expect { subject.print_report(report) }.to raise_error(described_class::PrinterError)
+      end
+    end
   end
 end

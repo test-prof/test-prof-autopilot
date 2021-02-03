@@ -4,6 +4,9 @@ module TestProf
   module Autopilot
     module Patches
       module EventProfPatch
+        ARTIFACT_DIR = "tmp/test_prof_autopilot"
+        ARTIFACT_FILE = "event_prof_report.json"
+
         def patch
           TestProf::EventProf::RSpecListener.class_eval do
             def report(profiler)
@@ -31,8 +34,8 @@ module TestProf
                 }
               end
 
-              dir_path = FileUtils.mkdir_p("tmp/test_prof_autopilot")[0]
-              json_path = "#{dir_path}/event_prof_report.json"
+              dir_path = FileUtils.mkdir_p(ARTIFACT_DIR)[0]
+              json_path = "#{dir_path}/#{ARTIFACT_FILE}"
 
               File.write(json_path, JSON.generate(profiler_hash))
             end
