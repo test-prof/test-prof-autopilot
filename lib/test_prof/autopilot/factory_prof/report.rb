@@ -1,27 +1,15 @@
 # frozen_string_literal: true
 
-require 'json'
+require "json"
+require "test_prof/autopilot/report_builder"
 
 module TestProf
   module Autopilot
     module FactoryProf
       class Report
+        extend ReportBuilder
+
         ARTIFACT_PATH = "tmp/test_prof_autopilot/factory_prof_report.json"
-
-        class << self
-          def build
-            raw_report = fetch_report
-
-            new(raw_report)
-          end
-
-          private
-
-          def fetch_report
-            file = File.read(ARTIFACT_PATH)
-            JSON.parse(file)
-          end
-        end
 
         attr_reader :profiler, :raw_report
 

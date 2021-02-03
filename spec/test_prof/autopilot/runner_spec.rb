@@ -15,7 +15,7 @@ describe TestProf::Autopilot::Runner do
       expect(subject.config.output).to eq $stdout
     end
 
-    it "creates runner object" do
+    it "creates runner instance" do
       expect(subject).to receive(:new)
 
       subject.invoke("spec/fixtures/blank_plan.rb", "rspec")
