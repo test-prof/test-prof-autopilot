@@ -25,7 +25,7 @@ describe TestProf::Autopilot::Runner do
 
   describe "#info" do
     context "when printable object is a report" do
-      let(:printable_object) { double("report", printer: "event_prof") }
+      let(:printable_object) { double("report", printer: :event_prof) }
 
       it "prints info" do
         expect(TestProf::Autopilot::EventProf::Printer).to receive(:print_report)
@@ -35,25 +35,15 @@ describe TestProf::Autopilot::Runner do
     end
 
     context "without printable object" do
-      it "logs message" do
-        expect(logging).to receive(:log).with("Specify data to print: 'report'")
-
-        subject.info
+      it "raises error" do
+        expect { subject.info }.to raise_error(ArgumentError)
       end
     end
   end
 
   describe "unknown_instruction" do
-    it "logs message" do
-      expect(logging).to receive(:log).with(
-        <<~MSG
-          'unknown_instruction' instruction is not supported.
-
-          Look to supported instructions: 'run', 'info'.
-        MSG
-      )
-
-      subject.unknown_instruction
+    it "raises error" do
+      expect { subject.unknown_instruction }.to raise_error(NoMethodError)
     end
   end
 end
