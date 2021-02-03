@@ -5,8 +5,6 @@ require "test_prof/autopilot/runner"
 describe TestProf::Autopilot::Runner do
   subject { described_class.new }
 
-  let(:logging) { TestProf::Autopilot::Logging }
-
   describe "#run" do
     let(:executor_class) { TestProf::Autopilot::ProfilingExecutor }
     let(:executor) { double("executor") }

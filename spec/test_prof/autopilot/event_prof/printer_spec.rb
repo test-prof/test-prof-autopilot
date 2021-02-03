@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-describe TestProf::Autopilot::EventProf::Report do
+describe TestProf::Autopilot::EventProf::Printer do
   subject { described_class }
 
+  let(:logging) { TestProf::Autopilot::Logging }
+  let(:report) { double("report", raw_report: raw_report) }
   let(:raw_report) do
     {
       "event" => "factory.create",
@@ -35,24 +37,24 @@ describe TestProf::Autopilot::EventProf::Report do
     }
   end
 
-  before do
-    stub_const("#{described_class}::ARTIFACT_PATH", "spec/fixtures/event_prof_report.json")
+  let(:msgs) do
+    <<~MSG
+      EventProf results for factory.create
+
+      Total time: 00:02.578 of 00:04.119 (62.59%)
+      Total events: 144
+
+      Top 10 slowest suites (by time):
+      FirstController (./spec/controllers/first_controller_spec.rb:1) – 00:01.289 (72 / 9) of 00:02.059 (62.59%)
+      SecondController (./spec/controllers/second_controller_spec.rb:1) – 00:01.289 (72 / 9) of 00:02.059 (62.59%)
+    MSG
   end
 
-  describe ".build" do
-    it "builds report" do
-      report = subject.build
+  describe "print_report" do
+    it "logs report" do
+      expect(logging).to receive(:log).with(msgs)
 
-      expect(report.printer).to eq :event_prof
-      expect(report.raw_report).to eq raw_report
-    end
-  end
-
-  describe "#paths" do
-    it "returns groups locations" do
-      report = described_class.build
-
-      expect(report.paths).to eq "./spec/controllers/first_controller_spec.rb:1 ./spec/controllers/second_controller_spec.rb:1"
+      subject.print_report(report)
     end
   end
 end
