@@ -21,6 +21,8 @@ module TestProf
         def invoke(plan_path, command)
           @config = Configuration.new(plan_path, command)
 
+          Logging.log "Reading #{plan_path}..."
+
           new.instance_eval(File.read(config.plan_path))
         end
       end

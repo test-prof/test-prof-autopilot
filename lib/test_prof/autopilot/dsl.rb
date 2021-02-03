@@ -8,6 +8,8 @@ module TestProf
   module Autopilot
     module Dsl
       def run(profiler, **options)
+        Logging.log "Executing 'run' with profiler:#{profiler} and options:#{options}"
+
         executor = ProfilingExecutor.new(profiler, options).start
 
         @report = executor.report
