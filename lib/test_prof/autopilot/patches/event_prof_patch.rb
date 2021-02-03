@@ -15,7 +15,8 @@ module TestProf
                 absolute_run_time: profiler.absolute_run_time,
                 total_count: profiler.total_count,
                 top_count: profiler.top_count,
-                rank_by: profiler.rank_by
+                rank_by: profiler.rank_by,
+                time_percentage: time_percentage(profiler.total_time, profiler.absolute_run_time)
               }
 
               profiler_hash[:groups] = result[:groups].map do |group|
@@ -23,6 +24,8 @@ module TestProf
                   description: group[:id].top_level_description,
                   location: group[:id].metadata[:location],
                   time: group[:time],
+                  count: group[:count],
+                  examples: group[:examples],
                   run_time: group[:run_time],
                   time_percentage: time_percentage(group[:time], group[:run_time])
                 }

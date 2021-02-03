@@ -16,7 +16,7 @@ module TestProf
       def info(printable_object = nil)
         return Logging.log "Specify data to print: 'report'" if printable_object.nil?
 
-        TestProf::Autopilot.const_get(Runner::PRINTERS[printable_object.printer]).print_report
+        TestProf::Autopilot.const_get(Runner::PRINTERS[printable_object.printer]).print_report(printable_object)
       end
 
       def method_missing(method, *_args)

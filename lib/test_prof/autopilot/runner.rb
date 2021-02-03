@@ -9,8 +9,8 @@ module TestProf
       prepend Dsl
 
       PRINTERS = {
-        "event_prof" => "EventProf::Printer",
-        "factory_prof" => "FactoryProf::Printer"
+        event_prof: "EventProf::Printer",
+        factory_prof: "FactoryProf::Printer"
       }.freeze
 
       attr_reader :report
