@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "test_prof/autopilot/profiling_executor"
+require "test_prof/autopilot/event_prof/printer"
+require "test_prof/autopilot/factory_prof/printer"
 
 module TestProf
   module Autopilot
@@ -14,7 +16,7 @@ module TestProf
       def info(printable_object = nil)
         return Logging.log "Specify data to print: 'report'" if printable_object.nil?
 
-        printable_object.print
+        TestProf::Autopilot.const_get(Runner::PRINTERS[printable_object.printer]).print_report
       end
 
       def method_missing(method, *_args)

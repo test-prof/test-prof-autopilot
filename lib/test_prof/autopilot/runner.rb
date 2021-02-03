@@ -8,6 +8,11 @@ module TestProf
     class Runner
       prepend Dsl
 
+      PRINTERS = {
+        "event_prof" => "EventProf::Printer",
+        "factory_prof" => "FactoryProf::Printer"
+      }.freeze
+
       attr_reader :report
 
       class << self

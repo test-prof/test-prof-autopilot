@@ -38,7 +38,7 @@ describe TestProf::Autopilot::EventProf::Report do
     it "builds report" do
       report = subject.build
 
-      expect(report.profiler).to eq :event_prof
+      expect(report.printer).to eq :event_prof
       expect(report.raw_report).to eq raw_report
     end
   end

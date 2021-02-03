@@ -25,10 +25,10 @@ describe TestProf::Autopilot::Runner do
 
   describe "#info" do
     context "when printable object is a report" do
-      let(:printable_object) { double("report", print: "test report") }
+      let(:printable_object) { double("report", printer: "event_prof") }
 
       it "prints info" do
-        expect(printable_object).to receive(:print)
+        expect(TestProf::Autopilot::EventProf::Printer).to receive(:print_report)
 
         subject.info(printable_object)
       end

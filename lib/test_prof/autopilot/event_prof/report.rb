@@ -11,10 +11,10 @@ module TestProf
 
         ARTIFACT_PATH = "tmp/test_prof_autopilot/event_prof_report.json"
 
-        attr_reader :profiler, :raw_report
+        attr_reader :printer, :raw_report
 
         def initialize(raw_report)
-          @profiler = :event_prof
+          @printer = :event_prof
           @raw_report = raw_report
         end
 

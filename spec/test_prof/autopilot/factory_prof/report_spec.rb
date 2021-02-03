@@ -36,7 +36,7 @@ describe TestProf::Autopilot::FactoryProf::Report do
     it "builds report" do
       report = subject.build
 
-      expect(report.profiler).to eq :factory_prof
+      expect(report.printer).to eq :factory_prof
       expect(report.raw_report).to eq raw_report
     end
   end
