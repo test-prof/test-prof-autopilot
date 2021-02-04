@@ -6,6 +6,9 @@ require "test_prof/autopilot/factory_prof/report"
 
 module TestProf
   module Autopilot
+    # Provides command and env variables building;
+    # Starts child process and executes command in it;
+    # Builds report after child process is finished.
     class ProfilingExecutor
       PROFILERS_REPORTS = {
         event_prof: "EventProf::Report",

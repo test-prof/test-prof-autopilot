@@ -5,6 +5,7 @@ require "test_prof/autopilot/logging"
 module TestProf
   module Autopilot
     module FactoryProf
+      # Module is used for printing :factory_prof report
       module Printer
         class PrinterError < StandardError; end
 

@@ -3,6 +3,9 @@
 module TestProf
   module Autopilot
     module Patches
+      # Monkey-patch for 'TestProf::EventProf::RSpecListener'.
+      # Redefined 'report' method provides writing artifact to the directory
+      # instead of printing report
       module EventProfPatch
         ARTIFACT_DIR = "tmp/test_prof_autopilot"
         ARTIFACT_FILE = "event_prof_report.json"

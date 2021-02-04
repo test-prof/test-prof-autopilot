@@ -7,6 +7,7 @@ require "test_prof/ext/string_truncate"
 module TestProf
   module Autopilot
     module EventProf
+      # Module is used for printing :event_prof report
       module Printer
         using FloatDuration
         using StringTruncate

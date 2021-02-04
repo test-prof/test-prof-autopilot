@@ -6,6 +6,8 @@ require "test_prof/autopilot/report_builder"
 module TestProf
   module Autopilot
     module FactoryProf
+      # :factory_prof report allows to add additional functionality
+      # for it's instances
       class Report
         extend ReportBuilder
 

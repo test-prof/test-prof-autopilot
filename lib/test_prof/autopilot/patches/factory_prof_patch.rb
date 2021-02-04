@@ -3,6 +3,9 @@
 module TestProf
   module Autopilot
     module Patches
+      # Monkey-patch for 'TestProf::FactoryProf::Printers::Simple'.
+      # Redefined 'report' method provides writing artifact to the directory
+      # instead of printing report
       module FactoryProfPatch
         ARTIFACT_DIR = "tmp/test_prof_autopilot"
         ARTIFACT_FILE = "factory_prof_report.json"

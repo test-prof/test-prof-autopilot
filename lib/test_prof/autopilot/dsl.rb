@@ -6,7 +6,11 @@ require "test_prof/autopilot/factory_prof/printer"
 
 module TestProf
   module Autopilot
+    # Module contains all available DSL instructions
     module Dsl
+      # 'run' is used to start profiling
+      # profiler – uniq name of profiler; available profilers – :event_prof, :factory_prof
+      # options; available options – :sample, :paths and :event ('event_prof' profiler only)
       def run(profiler, **options)
         Logging.log "Executing 'run' with profiler:#{profiler} and options:#{options}"
 
@@ -15,6 +19,8 @@ module TestProf
         @report = executor.report
       end
 
+      # 'info' prints report
+      # printable_object; available printable objects – 'report'
       def info(printable_object = nil)
         raise ArgumentError, "Specify printable object to print" if printable_object.nil?
 

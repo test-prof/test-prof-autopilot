@@ -2,6 +2,7 @@
 
 module TestProf
   module Autopilot
+    # Common module that extends reports classes
     module ReportBuilder
       ARTIFACT_MISSING_HINT = "Have you required 'test_prof/autopilot' to your code? "
 
