@@ -13,21 +13,18 @@ module TestProf
       }.freeze
 
       attr_accessor :profiler, :options
-      attr_reader :report, :success
-      alias_method :success?, :success
+      attr_reader :report
 
       def initialize(profiler, options)
         @profiler = profiler
         @options = options
-
-        @success = false
       end
 
       def start
         validate_profiler!
 
         execute
-        build_report if success?
+        build_report
 
         self
       end
@@ -48,14 +45,11 @@ module TestProf
         env = build_env
         command = build_command
 
-        @success =
-          Open3.popen2e(env, command) do |_stdin, stdout_and_stderr, wait_thr|
-            while (line = stdout_and_stderr.gets)
-              Logging.log line
-            end
-
-            wait_thr.value.success?
+        Open3.popen2e(env, command) do |_stdin, stdout_and_stderr, _wait_thr|
+          while (line = stdout_and_stderr.gets)
+            Logging.log line
           end
+        end
       end
 
       def build_env

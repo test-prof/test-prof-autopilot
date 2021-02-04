@@ -25,7 +25,7 @@ describe TestProf::Autopilot::ProfilingExecutor do
       it "builds proper env and report" do
         allow(TestProf::Autopilot::Runner).to receive(:config).and_return(config)
 
-        expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create"}, "rspec").and_return(true)
+        expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create"}, "rspec")
         expect(TestProf::Autopilot::EventProf::Report).to receive(:build).and_return(report)
 
         subject.start
@@ -47,7 +47,7 @@ describe TestProf::Autopilot::ProfilingExecutor do
         it "builds proper env and report" do
           allow(TestProf::Autopilot::Runner).to receive(:config).and_return(config)
 
-          expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create", "SAMPLE" => "100"}, "rspec").and_return(true)
+          expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create", "SAMPLE" => "100"}, "rspec")
           expect(TestProf::Autopilot::EventProf::Report).to receive(:build).and_return(report)
 
           subject.start
@@ -65,25 +65,12 @@ describe TestProf::Autopilot::ProfilingExecutor do
           expect(Open3).to receive(:popen2e).with(
             {"EVENT_PROF" => "factory.create"},
             "rspec ./spec/controllers/first_controller_spec.rb ./spec/controllers/second_controller_spec.rb"
-          ).and_return(true)
+          )
           expect(TestProf::Autopilot::EventProf::Report).to receive(:build).and_return(report)
 
           subject.start
 
           expect(subject.instance_variable_get("@report")).to eq report
-        end
-      end
-
-      context "when command is failed" do
-        it "does not build report" do
-          allow(TestProf::Autopilot::Runner).to receive(:config).and_return(config)
-
-          expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create"}, "rspec").and_return(false)
-          expect(TestProf::Autopilot::EventProf::Report).not_to receive(:build)
-
-          subject.start
-
-          expect(subject.instance_variable_get("@report")).to be_nil
         end
       end
     end
@@ -94,7 +81,7 @@ describe TestProf::Autopilot::ProfilingExecutor do
       it "builds proper env and report" do
         allow(TestProf::Autopilot::Runner).to receive(:config).and_return(config)
 
-        expect(Open3).to receive(:popen2e).with({"FPROF" => "1"}, "rspec").and_return(true)
+        expect(Open3).to receive(:popen2e).with({"FPROF" => "1"}, "rspec")
         expect(TestProf::Autopilot::FactoryProf::Report).to receive(:build).and_return(report)
 
         subject.start
@@ -108,7 +95,7 @@ describe TestProf::Autopilot::ProfilingExecutor do
         it "builds proper env and report" do
           allow(TestProf::Autopilot::Runner).to receive(:config).and_return(config)
 
-          expect(Open3).to receive(:popen2e).with({"FPROF" => "1", "SAMPLE" => "100"}, "rspec").and_return(true)
+          expect(Open3).to receive(:popen2e).with({"FPROF" => "1", "SAMPLE" => "100"}, "rspec")
           expect(TestProf::Autopilot::FactoryProf::Report).to receive(:build).and_return(report)
 
           subject.start
@@ -126,25 +113,12 @@ describe TestProf::Autopilot::ProfilingExecutor do
           expect(Open3).to receive(:popen2e).with(
             {"FPROF" => "1"},
             "rspec ./spec/controllers/first_controller_spec.rb ./spec/controllers/second_controller_spec.rb"
-          ).and_return(true)
+          )
           expect(TestProf::Autopilot::FactoryProf::Report).to receive(:build).and_return(report)
 
           subject.start
 
           expect(subject.instance_variable_get("@report")).to eq report
-        end
-      end
-
-      context "when command is failed" do
-        it "does not build report" do
-          allow(TestProf::Autopilot::Runner).to receive(:config).and_return(config)
-
-          expect(Open3).to receive(:popen2e).with({"FPROF" => "1"}, "rspec").and_return(false)
-          expect(TestProf::Autopilot::FactoryProf::Report).not_to receive(:build)
-
-          subject.start
-
-          expect(subject.instance_variable_get("@report")).to be_nil
         end
       end
     end
