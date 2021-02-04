@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "test_prof/autopilot/logging"
 require "test_prof/ext/float_duration"
 require "test_prof/ext/string_truncate"
 
