@@ -11,6 +11,12 @@ describe TestProf::Autopilot::Runner do
     let(:executor_result) { double("executor_result", report: report) }
     let(:report) { double("report") }
 
+    let(:logging) { TestProf::Autopilot::Logging }
+
+    before do
+      allow(logging).to receive(:log)
+    end
+
     it "executes profiling" do
       expect(executor_class).to receive(:new).with(:test_profiler, {}).and_return(executor)
       expect(executor).to receive(:start).and_return(executor_result)

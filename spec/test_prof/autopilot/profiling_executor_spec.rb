@@ -47,7 +47,7 @@ describe TestProf::Autopilot::ProfilingExecutor do
         it "builds proper env and report" do
           allow(TestProf::Autopilot::Runner).to receive(:config).and_return(config)
 
-          expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create", "SAMPLE" => 100}, "rspec").and_return(true)
+          expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create", "SAMPLE" => "100"}, "rspec").and_return(true)
           expect(TestProf::Autopilot::EventProf::Report).to receive(:build).and_return(report)
 
           subject.start
@@ -108,7 +108,7 @@ describe TestProf::Autopilot::ProfilingExecutor do
         it "builds proper env and report" do
           allow(TestProf::Autopilot::Runner).to receive(:config).and_return(config)
 
-          expect(Open3).to receive(:popen2e).with({"FPROF" => "1", "SAMPLE" => 100}, "rspec").and_return(true)
+          expect(Open3).to receive(:popen2e).with({"FPROF" => "1", "SAMPLE" => "100"}, "rspec").and_return(true)
           expect(TestProf::Autopilot::FactoryProf::Report).to receive(:build).and_return(report)
 
           subject.start

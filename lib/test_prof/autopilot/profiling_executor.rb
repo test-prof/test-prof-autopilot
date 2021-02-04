@@ -63,7 +63,7 @@ module TestProf
 
         env["EVENT_PROF"] = @options[:event] if @profiler == :event_prof
         env["FPROF"] = "1" if @profiler == :factory_prof
-        env["SAMPLE"] = @options[:sample] if @options[:sample]
+        env["SAMPLE"] = @options[:sample].to_s if @options[:sample]
 
         env
       end
