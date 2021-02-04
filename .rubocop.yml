@@ -28,7 +28,3 @@ Style/TrailingCommaInArrayLiteral:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: no_comma
-
-Style/MissingRespondToMissing:
-  Exclude:
-    - 'lib/test_prof/autopilot/dsl.rb'
