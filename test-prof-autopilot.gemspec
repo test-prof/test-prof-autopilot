@@ -18,8 +18,9 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 2.5"
   s.executables = ["auto-test-prof"]
 
+  s.add_runtime_dependency "test-prof", "~> 1.0"
+
   s.add_development_dependency "bundler", ">= 1.15"
   s.add_development_dependency "rake", ">= 13.0"
   s.add_development_dependency "rspec", ">= 3.10"
-  s.add_development_dependency "test-prof", "~> 1.0"
 end

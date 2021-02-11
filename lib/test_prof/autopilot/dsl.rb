@@ -23,9 +23,7 @@ module TestProf
 
       # 'info' prints report
       # printable_object; available printable objects – 'report'
-      def info(printable_object = nil)
-        raise ArgumentError, "Specify printable object to print" if printable_object.nil?
-
+      def info(printable_object)
         Registry.fetch(:"#{printable_object.printer}_printer").print_report(printable_object)
       end
     end
