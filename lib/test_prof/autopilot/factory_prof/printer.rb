@@ -5,6 +5,8 @@ module TestProf
     module FactoryProf
       # Module is used for printing :factory_prof report
       module Printer
+        Registry.register(:factory_prof_printer, self)
+
         class PrinterError < StandardError; end
 
         def print_report(report)

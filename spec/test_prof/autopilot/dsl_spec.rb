@@ -2,15 +2,19 @@
 
 require "test_prof/autopilot/runner"
 
+class DummyExecutor < TestProf::Autopilot::BaseProfilingExecutor
+  TestProf::Autopilot::Registry.register(:dummy_prof_executor, self)
+
+  def start
+    @report = "report"
+    self
+  end
+end
+
 describe TestProf::Autopilot::Runner do
   subject { described_class.new }
 
   describe "#run" do
-    let(:executor_class) { TestProf::Autopilot::ProfilingExecutor }
-    let(:executor) { double("executor") }
-    let(:executor_result) { double("executor_result", report: report) }
-    let(:report) { double("report") }
-
     let(:logging) { TestProf::Autopilot::Logging }
 
     before do
@@ -18,12 +22,17 @@ describe TestProf::Autopilot::Runner do
     end
 
     it "executes profiling" do
-      expect(executor_class).to receive(:new).with(:test_profiler, {}).and_return(executor)
-      expect(executor).to receive(:start).and_return(executor_result)
+      expect(subject.report).to be_nil
 
-      subject.run(:test_profiler, {})
+      subject.run(:dummy_prof, {})
 
-      expect(subject.instance_variable_get("@report")).to eq report
+      expect(subject.report).to eq "report"
+    end
+
+    context "with unknown profiler" do
+      it "raises error" do
+        expect { subject.run(:unknown_prof, {}) }.to raise_error(KeyError)
+      end
     end
   end
 

@@ -8,6 +8,8 @@ module TestProf
     module EventProf
       # Module is used for printing :event_prof report
       module Printer
+        Registry.register(:event_prof_printer, self)
+
         using FloatDuration
         using StringTruncate
 

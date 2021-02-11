@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-require "test_prof/autopilot/profiling_executor"
 require "test_prof/autopilot/event_prof/printer"
+require "test_prof/autopilot/event_prof/profiling_executor"
+
 require "test_prof/autopilot/factory_prof/printer"
+require "test_prof/autopilot/factory_prof/profiling_executor"
 
 module TestProf
   module Autopilot
@@ -14,7 +16,7 @@ module TestProf
       def run(profiler, **options)
         Logging.log "Executing 'run' with profiler:#{profiler} and options:#{options}"
 
-        executor = ProfilingExecutor.new(profiler, options).start
+        executor = Registry.fetch(:"#{profiler}_executor").new(options).start
 
         @report = executor.report
       end
@@ -24,7 +26,7 @@ module TestProf
       def info(printable_object = nil)
         raise ArgumentError, "Specify printable object to print" if printable_object.nil?
 
-        TestProf::Autopilot.const_get(Runner::PRINTERS[printable_object.printer]).print_report(printable_object)
+        Registry.fetch(:"#{printable_object.printer}_printer").print_report(printable_object)
       end
     end
   end

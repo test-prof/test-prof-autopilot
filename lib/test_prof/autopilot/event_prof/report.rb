@@ -9,6 +9,8 @@ module TestProf
       # :event_prof report allows to add additional functionality
       # for it's instances
       class Report
+        Registry.register(:event_prof_report, self)
+
         extend ReportBuilder
 
         ARTIFACT_PATH = "tmp/test_prof_autopilot/event_prof_report.json"

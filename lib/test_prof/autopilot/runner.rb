@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 require "test_prof/autopilot/logging"
+require "test_prof/autopilot/registry"
 require "test_prof/autopilot/dsl"
 
 module TestProf
   module Autopilot
     class Runner
       prepend Dsl
-
-      PRINTERS = {
-        event_prof: "EventProf::Printer",
-        factory_prof: "FactoryProf::Printer"
-      }.freeze
 
       attr_reader :report
 
