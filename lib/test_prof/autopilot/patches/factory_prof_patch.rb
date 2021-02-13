@@ -7,7 +7,6 @@ module TestProf
       # Redefined 'report' method provides writing artifact to the directory
       # instead of printing report
       module FactoryProfPatch
-        ARTIFACT_DIR = "tmp/test_prof_autopilot"
         ARTIFACT_FILE = "factory_prof_report.json"
 
         def patch
@@ -28,7 +27,7 @@ module TestProf
                   }
                 end
 
-              dir_path = FileUtils.mkdir_p(ARTIFACT_DIR)[0]
+              dir_path = FileUtils.mkdir_p(Configuration.config.artifacts_dir)[0]
               json_path = "#{dir_path}/#{ARTIFACT_FILE}"
 
               File.write(json_path, JSON.generate(profiler_hash))

@@ -13,7 +13,7 @@ module TestProf
 
         extend ReportBuilder
 
-        ARTIFACT_PATH = "tmp/test_prof_autopilot/event_prof_report.json"
+        ARTIFACT_FILE = "event_prof_report.json"
 
         attr_reader :printer, :raw_report
 

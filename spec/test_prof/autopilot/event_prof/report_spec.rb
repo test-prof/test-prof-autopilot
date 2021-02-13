@@ -36,7 +36,7 @@ describe TestProf::Autopilot::EventProf::Report do
   end
 
   before do
-    stub_const("#{described_class}::ARTIFACT_PATH", "spec/fixtures/event_prof_report.json")
+    TestProf::Autopilot::Configuration.config.artifacts_dir = "spec/fixtures"
   end
 
   describe ".build" do

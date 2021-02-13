@@ -50,9 +50,9 @@ module TestProf
       end
 
       def build_command
-        return Runner.config.command if @options[:paths].nil?
+        return Configuration.config.command if @options[:paths].nil?
 
-        "#{Runner.config.command} #{@options[:paths]}"
+        "#{Configuration.config.command} #{@options[:paths]}"
       end
 
       def build_report

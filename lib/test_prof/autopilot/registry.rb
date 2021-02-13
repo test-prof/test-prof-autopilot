@@ -2,6 +2,7 @@
 
 module TestProf
   module Autopilot
+    # Global registry
     class Registry
       @items = {}
 

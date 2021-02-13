@@ -4,7 +4,7 @@ module TestProf
   module Autopilot
     module Logging
       def log(message)
-        Runner.config.output.puts(message)
+        Configuration.config.output.puts(message)
       end
 
       module_function :log

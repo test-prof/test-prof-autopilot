@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require "test_prof/autopilot/logging"
+require "test_prof/autopilot/configuration"
 require "test_prof/autopilot/registry"
+require "test_prof/autopilot/logging"
 require "test_prof/autopilot/dsl"
 
 module TestProf
@@ -12,27 +13,15 @@ module TestProf
       attr_reader :report
 
       class << self
-        attr_reader :config
-
         def invoke(plan_path, command)
-          @config = Configuration.new(plan_path, command)
+          Configuration.configure do |config|
+            config.plan_path = plan_path
+            config.command = command
+          end
 
           Logging.log "Reading #{plan_path}..."
 
-          new.instance_eval(File.read(config.plan_path))
-        end
-      end
-
-      class Configuration
-        attr_accessor :plan_path,
-          :command,
-          :output
-
-        def initialize(plan_path, command)
-          @plan_path = plan_path
-          @command = command
-
-          @output = $stdout
+          new.instance_eval(File.read(Configuration.config.plan_path))
         end
       end
     end

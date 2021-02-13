@@ -15,7 +15,7 @@ module TestProf
       private
 
       def fetch_report
-        file = File.read(self::ARTIFACT_PATH)
+        file = File.read("#{Configuration.config.artifacts_dir}/#{self::ARTIFACT_FILE}")
         JSON.parse(file)
       rescue Errno::ENOENT => e
         e.message.prepend(ARTIFACT_MISSING_HINT)

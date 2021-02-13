@@ -3,11 +3,14 @@
 require "test_prof/autopilot/runner"
 
 class DummyExecutor < TestProf::Autopilot::BaseProfilingExecutor
-  TestProf::Autopilot::Registry.register(:dummy_prof_executor, self)
-
   def start
     @report = "report"
     self
+  end
+end
+
+class DummyPrinter
+  def print_report(_printable_object)
   end
 end
 
@@ -18,6 +21,8 @@ describe TestProf::Autopilot::Runner do
     let(:logging) { TestProf::Autopilot::Logging }
 
     before do
+      TestProf::Autopilot::Registry.register(:dummy_prof_executor, DummyExecutor)
+
       allow(logging).to receive(:log)
     end
 
@@ -37,14 +42,14 @@ describe TestProf::Autopilot::Runner do
   end
 
   describe "#info" do
-    context "when printable object is a report" do
-      let(:printable_object) { double("report", printer: :event_prof) }
+    let(:printable_object) { double("printable_object", printer: :dummy_prof) }
 
-      it "prints info" do
-        expect(TestProf::Autopilot::EventProf::Printer).to receive(:print_report)
+    before { TestProf::Autopilot::Registry.register(:dummy_prof_printer, DummyPrinter) }
 
-        subject.info(printable_object)
-      end
+    it "calls printer" do
+      expect(DummyPrinter).to receive(:print_report).with(printable_object)
+
+      subject.info(printable_object)
     end
 
     context "without printable object" do
