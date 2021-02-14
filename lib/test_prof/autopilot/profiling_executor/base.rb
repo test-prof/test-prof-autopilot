@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "open3"
+require "test_prof/autopilot/command_executor"
 require "test_prof/autopilot/event_prof/report"
 require "test_prof/autopilot/factory_prof/report"
 
@@ -8,8 +8,8 @@ module TestProf
   module Autopilot
     module ProfilingExecutor
       # Provides base command and env variables building;
-      # Starts child process and executes command in it;
-      # Builds report after child process is finished.
+      # Calls command executor;
+      # Builds report.
       class Base
         attr_accessor :options
         attr_reader :report
@@ -36,11 +36,7 @@ module TestProf
           env = build_env
           command = build_command
 
-          Open3.popen2e(env, command) do |_stdin, stdout_and_stderr, _wait_thr|
-            while (line = stdout_and_stderr.gets)
-              Logging.log line
-            end
-          end
+          CommandExecutor.execute(env, command)
         end
 
         def build_env

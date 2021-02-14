@@ -13,7 +13,7 @@ describe TestProf::Autopilot::Runner do
       allow(logging).to receive(:log)
     end
 
-    it "sets up config" do
+    it "sets up config", :aggregate_failures do
       subject.invoke("spec/fixtures/plans/blank_plan.rb", "rspec")
 
       expect(configuration.config.command).to eq "rspec"

@@ -5,6 +5,7 @@ require "test_prof/autopilot/profiling_executor/base"
 module TestProf
   module Autopilot
     module EventProf
+      # Provides :event_prof specific validations, env and command building.
       class ProfilingExecutor < ProfilingExecutor::Base
         Registry.register(:event_prof_executor, self)
 

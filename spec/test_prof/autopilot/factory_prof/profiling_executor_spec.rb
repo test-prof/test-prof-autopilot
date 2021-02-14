@@ -9,30 +9,33 @@ describe TestProf::Autopilot::FactoryProf::ProfilingExecutor do
   let(:report) { double("report") }
 
   describe "#start" do
+    let(:command_executor) { TestProf::Autopilot::CommandExecutor }
+    let(:report_class) { TestProf::Autopilot::FactoryProf::Report }
+
     before do
       TestProf::Autopilot::Configuration.config.command = "rspec"
       TestProf::Autopilot::Registry.register(:factory_prof_report, TestProf::Autopilot::FactoryProf::Report)
     end
 
     it "builds proper env and report" do
-      expect(Open3).to receive(:popen2e).with({"FPROF" => "1"}, "rspec")
-      expect(TestProf::Autopilot::FactoryProf::Report).to receive(:build).and_return(report)
+      expect(command_executor).to receive(:execute).with({"FPROF" => "1"}, "rspec")
+      expect(report_class).to receive(:build).and_return(report)
 
       subject.start
 
-      expect(subject.instance_variable_get("@report")).to eq report
+      expect(subject.report).to eq report
     end
 
     context "with sample option" do
       let(:options) { {event: "factory.create", sample: 100} }
 
       it "builds proper env and report" do
-        expect(Open3).to receive(:popen2e).with({"FPROF" => "1", "SAMPLE" => "100"}, "rspec")
-        expect(TestProf::Autopilot::FactoryProf::Report).to receive(:build).and_return(report)
+        expect(command_executor).to receive(:execute).with({"FPROF" => "1", "SAMPLE" => "100"}, "rspec")
+        expect(report_class).to receive(:build).and_return(report)
 
         subject.start
 
-        expect(subject.instance_variable_get("@report")).to eq report
+        expect(subject.report).to eq report
       end
     end
 
@@ -40,15 +43,15 @@ describe TestProf::Autopilot::FactoryProf::ProfilingExecutor do
       let(:options) { {paths: "./spec/controllers/first_controller_spec.rb ./spec/controllers/second_controller_spec.rb"} }
 
       it "builds proper env and report" do
-        expect(Open3).to receive(:popen2e).with(
+        expect(command_executor).to receive(:execute).with(
           {"FPROF" => "1"},
           "rspec ./spec/controllers/first_controller_spec.rb ./spec/controllers/second_controller_spec.rb"
         )
-        expect(TestProf::Autopilot::FactoryProf::Report).to receive(:build).and_return(report)
+        expect(report_class).to receive(:build).and_return(report)
 
         subject.start
 
-        expect(subject.instance_variable_get("@report")).to eq report
+        expect(subject.report).to eq report
       end
     end
   end

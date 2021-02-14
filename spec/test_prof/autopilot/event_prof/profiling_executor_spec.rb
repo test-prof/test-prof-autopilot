@@ -9,6 +9,9 @@ describe TestProf::Autopilot::EventProf::ProfilingExecutor do
   let(:report) { double("report") }
 
   describe "#start" do
+    let(:command_executor) { TestProf::Autopilot::CommandExecutor }
+    let(:report_class) { TestProf::Autopilot::EventProf::Report }
+
     let(:options) { {event: "factory.create"} }
 
     before do
@@ -17,8 +20,8 @@ describe TestProf::Autopilot::EventProf::ProfilingExecutor do
     end
 
     it "builds proper env and report" do
-      expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create"}, "rspec")
-      expect(TestProf::Autopilot::EventProf::Report).to receive(:build).and_return(report)
+      expect(command_executor).to receive(:execute).with({"EVENT_PROF" => "factory.create"}, "rspec")
+      expect(report_class).to receive(:build).and_return(report)
 
       subject.start
 
@@ -37,8 +40,8 @@ describe TestProf::Autopilot::EventProf::ProfilingExecutor do
       let(:options) { {event: "factory.create", sample: 100} }
 
       it "builds proper env and report" do
-        expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create", "SAMPLE" => "100"}, "rspec")
-        expect(TestProf::Autopilot::EventProf::Report).to receive(:build).and_return(report)
+        expect(command_executor).to receive(:execute).with({"EVENT_PROF" => "factory.create", "SAMPLE" => "100"}, "rspec")
+        expect(report_class).to receive(:build).and_return(report)
 
         subject.start
 
@@ -50,11 +53,11 @@ describe TestProf::Autopilot::EventProf::ProfilingExecutor do
       let(:options) { {event: "factory.create", paths: "./spec/controllers/first_controller_spec.rb ./spec/controllers/second_controller_spec.rb"} }
 
       it "builds proper env and report" do
-        expect(Open3).to receive(:popen2e).with(
+        expect(command_executor).to receive(:execute).with(
           {"EVENT_PROF" => "factory.create"},
           "rspec ./spec/controllers/first_controller_spec.rb ./spec/controllers/second_controller_spec.rb"
         )
-        expect(TestProf::Autopilot::EventProf::Report).to receive(:build).and_return(report)
+        expect(report_class).to receive(:build).and_return(report)
 
         subject.start
 
