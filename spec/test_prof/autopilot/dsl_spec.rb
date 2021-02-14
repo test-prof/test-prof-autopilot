@@ -2,7 +2,7 @@
 
 require "test_prof/autopilot/runner"
 
-class DummyExecutor < TestProf::Autopilot::BaseProfilingExecutor
+class DummyExecutor < TestProf::Autopilot::ProfilingExecutor::Base
   def start
     @report = "report"
     self
