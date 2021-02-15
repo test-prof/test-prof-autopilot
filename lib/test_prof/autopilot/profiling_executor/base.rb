@@ -11,7 +11,6 @@ module TestProf
       # Calls command executor;
       # Builds report.
       class Base
-        attr_accessor :options
         attr_reader :report
 
         def initialize(options)

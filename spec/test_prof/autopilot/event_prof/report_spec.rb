@@ -50,7 +50,7 @@ describe TestProf::Autopilot::EventProf::Report do
 
   describe "#paths" do
     it "returns groups locations" do
-      report = described_class.build
+      report = subject.build
 
       expect(report.paths).to eq "./spec/controllers/first_controller_spec.rb:1 ./spec/controllers/second_controller_spec.rb:1"
     end

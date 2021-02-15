@@ -18,7 +18,6 @@ module TestProf
 
         def validate_profiler!
           super
-
           raise ArgumentError, "'event' option is required for 'event_prof' profiler" if @options[:event].nil?
         end
 

@@ -9,7 +9,7 @@ describe TestProf::Autopilot::CommandExecutor do
     it "executes command in child process" do
       expect(Open3).to receive(:popen2e).with({"EVENT_PROF" => "factory.create"}, "rspec")
 
-      described_class.execute({"EVENT_PROF" => "factory.create"}, "rspec")
+      subject.execute({"EVENT_PROF" => "factory.create"}, "rspec")
     end
   end
 end
