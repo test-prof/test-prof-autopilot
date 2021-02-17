@@ -22,15 +22,15 @@ module TestProf
                     total_count: result.stats.sum { |stat| stat[:total_count] },
                     total_top_level_count: result.stats.sum { |stat| stat[:top_level_count] },
                     total_time: result.stats.sum { |stat| stat[:top_level_time] },
-                    total_uniq_factories: result.stats.map { |stat| stat[:name] }.uniq.count,
+                    total_uniq_factories: result.stats.uniq { |stat| stat[:name] }.count,
                     stats: result.stats
                   }
                 end
 
               dir_path = FileUtils.mkdir_p(Configuration.config.artifacts_dir)[0]
-              json_path = "#{dir_path}/#{ARTIFACT_FILE}"
+              file_path = File.join(dir_path, ARTIFACT_FILE)
 
-              File.write(json_path, JSON.generate(profiler_hash))
+              File.write(file_path, JSON.generate(profiler_hash))
             end
           end
         end

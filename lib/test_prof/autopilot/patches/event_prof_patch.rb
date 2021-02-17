@@ -37,9 +37,9 @@ module TestProf
               end
 
               dir_path = FileUtils.mkdir_p(Configuration.config.artifacts_dir)[0]
-              json_path = "#{dir_path}/#{ARTIFACT_FILE}"
+              file_path = File.join(dir_path, ARTIFACT_FILE)
 
-              File.write(json_path, JSON.generate(profiler_hash))
+              File.write(file_path, JSON.generate(profiler_hash))
             end
           end
         end
