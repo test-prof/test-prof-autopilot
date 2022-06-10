@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 
 gem "pry-byebug", platform: :mri
+gem "factory_bot", "~> 5.0"
 
 gemspec
 

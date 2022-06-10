@@ -18,4 +18,14 @@ RSpec.configure do |config|
 
   config.order = :random
   Kernel.srand config.seed
+
+  config.before(:each) do
+    # Clear configuration
+    TestProf::Autopilot::Configuration.remove_instance_variable(:@config) if
+      TestProf::Autopilot::Configuration.instance_variable_defined?(:@config)
+
+    # Clear registry
+    TestProf::Autopilot::Registry.instance_variable_set(:@items, {}) if
+      TestProf::Autopilot::Registry.instance_variable_defined?(:@items)
+  end
 end
