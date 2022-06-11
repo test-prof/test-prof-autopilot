@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+begin; require "active_support/isolated_execution_state"; rescue LoadError; end
+
 class User
   attr_accessor :name
 end

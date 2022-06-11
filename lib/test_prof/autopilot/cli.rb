@@ -23,22 +23,20 @@ module TestProf
       private
 
       def optparser
-        @optparser ||= begin
-          OptionParser.new do |opts|
-            opts.banner = "Usage: auto-test-prof [options]"
+        @optparser ||= OptionParser.new do |opts|
+          opts.banner = "Usage: auto-test-prof [options]"
 
-            opts.on("-v", "--version", "Print version") do
-              $stdout.puts TestProf::Autopilot::VERSION
-              exit 0
-            end
+          opts.on("-v", "--version", "Print version") do
+            $stdout.puts TestProf::Autopilot::VERSION
+            exit 0
+          end
 
-            opts.on("-c COMMAND", "--command", "Command to run tests") do |val|
-              @command = val
-            end
+          opts.on("-c COMMAND", "--command", "Command to run tests") do |val|
+            @command = val
+          end
 
-            opts.on("-i FILE", "--plan", "Path to test plan") do |val|
-              @plan_path = val
-            end
+          opts.on("-i FILE", "--plan", "Path to test plan") do |val|
+            @plan_path = val
           end
         end
       end

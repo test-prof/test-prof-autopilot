@@ -1,30 +1,29 @@
 require:
-  - standard/cop/semantic_blocks
+  - standard/cop/block_single_line_braces
 
 inherit_gem:
   standard: config/base.yml
+
+inherit_from:
+  - .rubocop/rubocop_rspec.yml
 
 AllCops:
   Exclude:
     - 'bin/*'
     - 'tmp/**/*'
-    - 'Gemfile'
     - 'vendor/**/*'
     - 'gemfiles/**/*'
-    - 'lib/.rbnext/**/*'
-    - 'lib/generators/**/templates/*.rb'
-    - '.github/**/*'
+    - 'bench/**/*'
   DisplayCopNames: true
-  TargetRubyVersion: 2.7
+  SuggestExtensions: false
+  TargetRubyVersion: 2.6
 
-Standard/SemanticBlocks:
+Standard/BlockSingleLineBraces:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: true
 
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: no_comma
-
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: no_comma
+RSpec/IdenticalEqualityAssertion:
+  Exclude:
+    - 'spec/fixtures/**/*'

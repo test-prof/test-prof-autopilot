@@ -29,14 +29,14 @@ describe TestProf::Autopilot::Runner do
     it "executes profiling" do
       expect(subject.report).to be_nil
 
-      subject.run(:dummy_prof, {})
+      subject.run(:dummy_prof)
 
       expect(subject.report).to eq "report"
     end
 
     context "with unknown profiler" do
       it "raises error" do
-        expect { subject.run(:unknown_prof, {}) }.to raise_error(KeyError)
+        expect { subject.run(:unknown_prof) }.to raise_error(KeyError)
       end
     end
   end

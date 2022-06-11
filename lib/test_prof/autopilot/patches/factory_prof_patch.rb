@@ -11,7 +11,7 @@ module TestProf
 
         def patch
           TestProf::FactoryProf::Printers::Simple.module_eval do
-            def self.dump(result)
+            def self.dump(result, **)
               profiler_hash =
                 if result.raw_stats == {}
                   {

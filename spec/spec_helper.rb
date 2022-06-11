@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-begin
-  require "pry-byebug"
-rescue LoadError
-end
+require "debug" unless ENV["CI"]
 
+require "active_support"
 require "test-prof-autopilot"
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
@@ -19,7 +17,7 @@ RSpec.configure do |config|
   config.order = :random
   Kernel.srand config.seed
 
-  config.before(:each) do
+  config.before do
     # Clear configuration
     TestProf::Autopilot::Configuration.remove_instance_variable(:@config) if
       TestProf::Autopilot::Configuration.instance_variable_defined?(:@config)

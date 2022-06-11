@@ -5,9 +5,9 @@ require_relative "lib/test_prof/autopilot/version"
 Gem::Specification.new do |s|
   s.name = "test-prof-autopilot"
   s.version = TestProf::Autopilot::VERSION
-  s.authors = ["Vladimir Dementyev"]
-  # s.email = ["dementiev.vm@gmail.com"]
-  # s.homepage = "http://github.com/palkan/test-prof-autopilot"
+  s.authors = ["Ruslan Shakirov", "Vladimir Dementyev"]
+  s.email = ["ruslan@shakirov.dev", "dementiev.vm@gmail.com"]
+  s.homepage = "http://github.com/test-prof/test-prof-autopilot"
   s.summary = "Automatic TestProf runner"
   s.description = "Automatic TestProf runner"
 
