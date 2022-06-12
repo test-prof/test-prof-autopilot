@@ -22,6 +22,10 @@ module TestProf
         def self.build
           new(Marshal.load(fetch_report))
         end
+
+        def merge(other)
+          self + other
+        end
       end
     end
   end

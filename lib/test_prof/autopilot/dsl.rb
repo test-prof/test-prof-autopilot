@@ -14,7 +14,7 @@ module TestProf
     # Module contains all available DSL instructions
     module Dsl
       # 'run' is used to start profiling
-      # profiler – uniq name of profiler; available profilers – :event_prof, :factory_prof
+      # profiler – uniq name of profiler; available profilers – :event_prof, :factory_prof, :stack_prof
       # options; available options – :sample, :paths and :event ('event_prof' profiler only)
       def run(profiler, **options)
         Logging.log "Executing 'run' with profiler:#{profiler} and options:#{options}"
@@ -22,6 +22,25 @@ module TestProf
         executor = Registry.fetch(:"#{profiler}_executor").new(options).start
 
         @report = executor.report
+      end
+
+      # 'aggregate' is used to run one profiler several times and merge results
+      # supported profilers – 'stack_prof'
+      #
+      # example of using:
+      # aggregate(3) { run :stack_prof, sample: 100 }
+      def aggregate(number, &block)
+        raise ArgumentError, "Block is required!" unless block
+
+        agg_report = nil
+
+        number.times do
+          block.call
+
+          agg_report = agg_report.nil? ? report : agg_report.merge(report)
+        end
+
+        @report = agg_report
       end
 
       # 'info' prints report

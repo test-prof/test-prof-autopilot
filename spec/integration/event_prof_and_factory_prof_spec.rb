@@ -11,7 +11,7 @@ describe "event prof + factory prof scenario" do
       expect(output).to include "Executing 'run' with profiler:event_prof and options:{:event=>\"factory.create\"}"
       expect(output).to include "[TEST PROF INFO] EventProf enabled (factory.create)"
 
-      expect(output).to include "Executing 'run' with profiler:factory_prof and options:{:paths=>\"./spec/fixtures/tests.rb:27 ./spec/fixtures/tests.rb:43\"}"
+      expect(output).to match(/Executing 'run' with profiler:factory_prof and options:{:paths=>".\/spec\/fixtures\/tests.rb:\d{2} .\/spec\/fixtures\/tests.rb:\d{2}"}/)
       expect(output).to include "[TEST PROF INFO] FactoryProf enabled (simple mode)"
 
       expect(output).to include "Factories usage"
@@ -33,7 +33,7 @@ describe "event prof + factory prof scenario" do
       expect(output).to include "Executing 'run' with profiler:event_prof and options:{:event=>\"factory.create\"}"
       expect(output).to include "[TEST PROF INFO] EventProf enabled (factory.create)"
 
-      expect(output).to include "Executing 'run' with profiler:factory_prof and options:{:paths=>\"./spec/fixtures/tests.rb:27 ./spec/fixtures/tests.rb:43\"}"
+      expect(output).to match(/Executing 'run' with profiler:factory_prof and options:{:paths=>".\/spec\/fixtures\/tests.rb:\d{2} .\/spec\/fixtures\/tests.rb:\d{2}"}/)
       expect(output).to include "[TEST PROF INFO] FactoryProf enabled (simple mode)"
 
       expect(output).not_to include "Factories usage"
