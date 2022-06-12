@@ -6,6 +6,9 @@ require "test_prof/autopilot/event_prof/profiling_executor"
 require "test_prof/autopilot/factory_prof/printer"
 require "test_prof/autopilot/factory_prof/profiling_executor"
 
+require "test_prof/autopilot/stack_prof/printer"
+require "test_prof/autopilot/stack_prof/profiling_executor"
+
 module TestProf
   module Autopilot
     # Module contains all available DSL instructions

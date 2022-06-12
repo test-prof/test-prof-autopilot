@@ -7,17 +7,16 @@ module TestProf
       ARTIFACT_MISSING_HINT = "Have you required 'test_prof/autopilot' to your code? "
 
       def build
-        raw_report = fetch_report
+        report = JSON.parse(fetch_report)
 
-        new(raw_report)
+        new(report)
       end
 
       private
 
       def fetch_report
         file_path = File.join(Configuration.config.artifacts_dir, self::ARTIFACT_FILE)
-        file = File.read(file_path)
-        JSON.parse(file)
+        File.read(file_path)
       rescue Errno::ENOENT => e
         e.message.prepend(ARTIFACT_MISSING_HINT)
         raise
