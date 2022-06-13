@@ -27,7 +27,7 @@ module TestProf
                   }
                 end
 
-              dir_path = FileUtils.mkdir_p(Configuration.config.tmp_dir)[0]
+              dir_path = FileUtils.mkdir_p(Autopilot.config.tmp_dir)[0]
               file_path = File.join(dir_path, ARTIFACT_FILE)
 
               File.write(file_path, JSON.generate(profiler_hash))

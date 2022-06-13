@@ -10,7 +10,7 @@ module TestProf
         ARTIFACT_FILE = "stack_prof_report"
 
         def write_report(report, file_name: ARTIFACT_FILE)
-          dir_path = FileUtils.mkdir_p(Configuration.config.artifacts_dir)[0]
+          dir_path = FileUtils.mkdir_p(Autopilot.config.artifacts_dir)[0]
           file_path = File.join(dir_path, file_name + ".json")
 
           File.write(file_path, JSON.generate(report.data))

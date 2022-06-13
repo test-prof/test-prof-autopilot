@@ -15,7 +15,7 @@ module TestProf
       private
 
       def fetch_report
-        file_path = File.join(Configuration.config.tmp_dir, self::ARTIFACT_FILE)
+        file_path = File.join(Autopilot.config.tmp_dir, self::ARTIFACT_FILE)
         File.read(file_path)
       rescue Errno::ENOENT => e
         e.message.prepend(ARTIFACT_MISSING_HINT)

@@ -47,9 +47,9 @@ module TestProf
         end
 
         def build_command
-          return Configuration.config.command if @options[:paths].nil?
+          return Autopilot.config.command if @options[:paths].nil?
 
-          "#{Configuration.config.command} #{@options[:paths]}"
+          "#{Autopilot.config.command} #{@options[:paths]}"
         end
 
         def build_report

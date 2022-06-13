@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe TestProf::Autopilot::Configuration do
-  subject { described_class.config }
+  subject { described_class.new }
 
   specify "defaults", :aggregate_failures do
     expect(subject.output).to eq $stdout

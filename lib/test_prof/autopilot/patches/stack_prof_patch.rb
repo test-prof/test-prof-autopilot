@@ -11,7 +11,7 @@ module TestProf
             private
 
             def self.build_path(_name)
-              dir_path = FileUtils.mkdir_p(Configuration.config.tmp_dir)[0]
+              dir_path = FileUtils.mkdir_p(Autopilot.config.tmp_dir)[0]
               File.join(dir_path, ARTIFACT_FILE)
             end
           end

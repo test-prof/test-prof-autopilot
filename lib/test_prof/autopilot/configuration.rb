@@ -2,18 +2,18 @@
 
 module TestProf
   module Autopilot
-    # Global configuration
-    class Configuration
-      class << self
-        def config
-          @config ||= new
-        end
-
-        def configure
-          yield config
-        end
+    class << self
+      def config
+        @config ||= Configuration.new
       end
 
+      def configure
+        yield config
+      end
+    end
+
+    # Global configuration
+    class Configuration
       attr_accessor :output,
         :tmp_dir,
         :artifacts_dir,

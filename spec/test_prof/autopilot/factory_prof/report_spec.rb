@@ -29,7 +29,7 @@ describe TestProf::Autopilot::FactoryProf::Report do
   end
 
   before do
-    TestProf::Autopilot::Configuration.config.tmp_dir = "spec/fixtures"
+    TestProf::Autopilot.config.tmp_dir = "spec/fixtures"
   end
 
   describe ".build" do

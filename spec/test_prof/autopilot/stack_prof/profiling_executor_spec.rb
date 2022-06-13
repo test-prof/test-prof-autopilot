@@ -13,7 +13,7 @@ describe TestProf::Autopilot::StackProf::ProfilingExecutor do
     let(:report_class) { TestProf::Autopilot::StackProf::Report }
 
     before do
-      TestProf::Autopilot::Configuration.config.command = "rspec"
+      TestProf::Autopilot.config.command = "rspec"
       TestProf::Autopilot::Registry.register(:stack_prof_report, TestProf::Autopilot::StackProf::Report)
     end
 

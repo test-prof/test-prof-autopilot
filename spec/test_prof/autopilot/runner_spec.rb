@@ -7,7 +7,7 @@ describe TestProf::Autopilot::Runner do
 
   describe ".invoke" do
     let(:logging) { TestProf::Autopilot::Logging }
-    let(:configuration) { TestProf::Autopilot::Configuration }
+    let(:configuration) { TestProf::Autopilot.config }
 
     before do
       allow(logging).to receive(:log)
@@ -16,8 +16,8 @@ describe TestProf::Autopilot::Runner do
     it "sets up config", :aggregate_failures do
       subject.invoke("spec/fixtures/plans/blank_plan.rb", "rspec")
 
-      expect(configuration.config.command).to eq "rspec"
-      expect(configuration.config.plan_path).to eq "spec/fixtures/plans/blank_plan.rb"
+      expect(configuration.command).to eq "rspec"
+      expect(configuration.plan_path).to eq "spec/fixtures/plans/blank_plan.rb"
     end
 
     it "creates runner instance" do
