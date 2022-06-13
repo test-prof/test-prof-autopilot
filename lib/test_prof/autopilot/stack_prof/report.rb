@@ -12,10 +12,10 @@ module TestProf
 
         ARTIFACT_FILE = "stack_prof_report.dump"
 
-        attr_reader :printer
+        attr_reader :type
 
         def initialize(data)
-          @printer = :stack_prof
+          @type = :stack_prof
           super(data)
         end
 

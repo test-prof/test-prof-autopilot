@@ -22,6 +22,13 @@ describe "stack prof scenario" do
     end
   end
 
+  specify "run and save" do
+    plan = "spec/fixtures/plans/stack_prof_save_plan.rb"
+
+    run_command("bin/auto-test-prof --plan #{plan} --command #{command}")
+    expect(File).to exist("test_prof_autopilot/stack_prof_test.json")
+  end
+
   specify "aggregate and print" do
     plan = "spec/fixtures/plans/stack_prof_aggregate_plan.rb"
 

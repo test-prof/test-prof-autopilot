@@ -42,7 +42,7 @@ describe TestProf::Autopilot::Runner do
   end
 
   describe "#info" do
-    let(:printable_object) { double("printable_object", printer: :dummy_prof) }
+    let(:printable_object) { double("printable_object", type: :dummy_prof) }
 
     before { TestProf::Autopilot::Registry.register(:dummy_prof_printer, DummyPrinter) }
 

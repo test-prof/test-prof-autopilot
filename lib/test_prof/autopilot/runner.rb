@@ -4,6 +4,7 @@ require "test_prof/autopilot/configuration"
 require "test_prof/autopilot/registry"
 require "test_prof/autopilot/logging"
 require "test_prof/autopilot/dsl"
+require "fileutils"
 
 module TestProf
   module Autopilot

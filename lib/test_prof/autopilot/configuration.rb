@@ -15,13 +15,15 @@ module TestProf
       end
 
       attr_accessor :output,
+        :tmp_dir,
         :artifacts_dir,
         :plan_path,
         :command
 
       def initialize
         @output = $stdout
-        @artifacts_dir = "tmp/test_prof_autopilot"
+        @tmp_dir = "tmp/test_prof_autopilot"
+        @artifacts_dir = "test_prof_autopilot"
       end
     end
   end

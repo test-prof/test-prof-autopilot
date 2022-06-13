@@ -7,6 +7,7 @@ require "test_prof/autopilot/factory_prof/printer"
 require "test_prof/autopilot/factory_prof/profiling_executor"
 
 require "test_prof/autopilot/stack_prof/printer"
+require "test_prof/autopilot/stack_prof/writer"
 require "test_prof/autopilot/stack_prof/profiling_executor"
 
 module TestProf
@@ -46,7 +47,12 @@ module TestProf
       # 'info' prints report
       # printable_object; available printable objects – 'report'
       def info(printable_object)
-        Registry.fetch(:"#{printable_object.printer}_printer").print_report(printable_object)
+        Registry.fetch(:"#{printable_object.type}_printer").print_report(printable_object)
+      end
+
+      # 'save' writes report to file
+      def save(report, **options)
+        Registry.fetch(:"#{report.type}_writer").write_report(report, **options)
       end
     end
   end
