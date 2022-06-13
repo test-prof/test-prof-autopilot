@@ -18,7 +18,7 @@ module TestProf
 
         def build_env
           super.tap do |env|
-            env["TEST_STACK_PROF"] = "1"
+            env["TEST_STACK_PROF"] = @options[:boot] ? "boot" : "1"
           end
         end
       end

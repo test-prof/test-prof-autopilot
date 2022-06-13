@@ -47,4 +47,23 @@ describe "stack prof scenario" do
       expect(output).to match(/\d+\s+\(\d{1,2}.\d{1,2}%\)\s+\d+\s+\(\d{1,2}.\d{1,2}%\)\s+<top \(required\)>/)
     end
   end
+
+  specify "run in boot mode and print" do
+    plan = "spec/fixtures/plans/stack_prof_boot_plan.rb"
+
+    run_command("bin/auto-test-prof --plan #{plan} --command #{command}") do |output|
+      expect(output).to include "Reading spec/fixtures/plans/stack_prof_boot_plan.rb..."
+      expect(output).to include "Executing 'run' with profiler:stack_prof and options:{:boot=>true}"
+      expect(output).to include "[TEST PROF INFO] StackProf (raw) enabled globally: mode – wall, target – boot"
+
+      expect(output).to include "=================================="
+      expect(output).to include "Mode: wall(1000)"
+      expect(output).to match(/Samples: \d+ \(\d{1,2}.\d{1,2}% miss rate\)/)
+      expect(output).to match(/GC: \d+ \(\d{1,2}.\d{1,2}%\)/)
+      expect(output).to include "=================================="
+
+      expect(output).to include "TOTAL    (pct)     SAMPLES    (pct)     FRAME"
+      expect(output).to match(/\d+\s+\(\d{1,2}.\d{1,2}%\)\s+\d+\s+\(\d{1,2}.\d{1,2}%\)\s+<top \(required\)>/)
+    end
+  end
 end
