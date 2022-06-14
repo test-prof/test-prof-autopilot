@@ -18,12 +18,15 @@ module TestProf
         :tmp_dir,
         :artifacts_dir,
         :plan_path,
+        :merge_format,
+        :merge_file,
         :command
 
       def initialize
         @output = $stdout
         @tmp_dir = "tmp/test_prof_autopilot"
         @artifacts_dir = "test_prof_autopilot"
+        @merge_format = "info"
       end
     end
   end

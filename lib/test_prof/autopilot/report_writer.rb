@@ -21,7 +21,9 @@ module TestProf
       def write(file_name: nil, format: "json")
         file_path = file_name || self.class::ARTIFACT_FILE
 
-        unless File.absolute_path?(file_path)
+        if File.absolute_path?(file_path)
+          FileUtils.mkdir_p(File.dirname(file_path))
+        else
           dir_path = FileUtils.mkdir_p(Autopilot.config.artifacts_dir)[0]
           file_path = File.join(dir_path, file_path + ".#{format}")
         end
