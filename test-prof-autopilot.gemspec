@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir.glob("lib/**/*") + Dir.glob("bin/**/*") + %w[README.md LICENSE.txt CHANGELOG.md]
   s.require_paths = ["lib"]
-  s.required_ruby_version = ">= 2.5"
+  s.required_ruby_version = ">= 2.7"
   s.executables = ["auto-test-prof"]
 
   s.add_runtime_dependency "test-prof", "~> 1.0"
