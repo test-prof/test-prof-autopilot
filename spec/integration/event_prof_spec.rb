@@ -65,7 +65,7 @@ describe "event prof scenario" do
 
       expect(output).to include "5 examples, 0 failures"
 
-      expect(output).to include "EventProf report saved: test_prof_autopilot/event_prof_report.json"
+      expect(output).to include "Report saved: test_prof_autopilot/event_prof_report.json"
     end
   end
 end
