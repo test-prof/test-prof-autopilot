@@ -1,15 +1,27 @@
 {
-  "total":4,
-  "stacks":[
-    [
-      "user"
-    ],
-    [
-      "user"
-    ],
-    [
-      "job",
-      "user"
-    ]
-  ]
+  "stacks": [
+    ["user"],
+    ["user", "account"],
+    ["user"],
+    ["user", "account"],
+    ["user"],
+    ["account"],
+    ["account"]
+  ],
+  "raw_stats": {
+    "user": {
+      "name": "user",
+      "total_count": 5,
+      "top_level_count": 5,
+      "total_time": 0.0022159996442496777,
+      "top_level_time": 0.0022159996442496777
+    },
+    "account": {
+      "name": "account",
+      "total_count": 4,
+      "top_level_count": 2,
+      "total_time": 0.02294999547302723,
+      "top_level_time": 0.02294999547302723
+    }
+  }
 }

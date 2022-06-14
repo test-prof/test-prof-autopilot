@@ -3,22 +3,36 @@
 module TestProf
   module Autopilot
     module FactoryProf
-      # Module is used for writing :factory_prof report in different formats
-      module Writer
+      # Class is used for writing :factory_prof report in different formats
+      class Writer < ReportWriter
         Registry.register(:factory_prof_writer, self)
 
         ARTIFACT_FILE = "factory_prof_report"
 
-        def write_report(report, file_name: ARTIFACT_FILE)
-          dir_path = FileUtils.mkdir_p(Autopilot.config.artifacts_dir)[0]
-          file_path = File.join(dir_path, file_name + ".json")
-
-          File.write(file_path, JSON.generate(report.raw_report))
-
-          Logging.log "FactoryProf report saved: #{file_path}"
+        def generate_json
+          report.result.to_json
         end
 
-        module_function :write_report
+        def generate_html
+          result = report.result
+
+          report_data = {
+            total_stacks: result.stacks.size,
+            total: result.total_count
+          }
+
+          report_data[:roots] = TestProf::FactoryProf::Printers::Flamegraph.convert_stacks(result)
+
+          path = TestProf::Utils::HTMLBuilder.generate(
+            data: report_data,
+            template: TestProf::FactoryProf::Printers::Flamegraph::TEMPLATE,
+            output: TestProf::FactoryProf::Printers::Flamegraph::OUTPUT_NAME
+          )
+
+          File.read(path).tap do
+            FileUtils.rm(path)
+          end
+        end
       end
     end
   end

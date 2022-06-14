@@ -17,7 +17,7 @@ describe "event prof + factory prof scenario" do
       expect(output).to include "Factories usage"
       expect(output).to include "Total: 5"
       expect(output).to include "Total top-level: 5"
-      expect(output).to match(/Total time: 0.\d{4}s/)
+      expect(output).to include "Total time: "
       expect(output).to include "Total uniq factories: 1"
 
       expect(output).to match(/total\s+top-level\s+total time\s+time per call\s+top-level time\s+name/)

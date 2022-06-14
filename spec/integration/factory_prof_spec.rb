@@ -14,7 +14,7 @@ describe "factory prof scenario" do
       expect(output).to include "Factories usage"
       expect(output).to include "Total: 5"
       expect(output).to include "Total top-level: 5"
-      expect(output).to match(/Total time: 0.\d{4}s/)
+      expect(output).to include("Total time: ")
       expect(output).to include "Total uniq factories: 1"
 
       expect(output).to match(/total\s+top-level\s+total time\s+time per call\s+top-level time\s+name/)
@@ -33,7 +33,7 @@ describe "factory prof scenario" do
       expect(output).not_to include "Factories usage"
       expect(output).not_to include "Total: 5"
       expect(output).not_to include "Total top-level: 5"
-      expect(output).not_to match(/Total time: 0.\d{4}s/)
+      expect(output).not_to include "Total time: "
       expect(output).not_to include "Total uniq factories: 1"
       expect(output).not_to match(/total\s+top-level\s+total time\s+time per call\s+top-level time\s+name/)
       expect(output).not_to match(/\s+5\s+5\s+(\d+\.\d{4}s\s+){3}user/)
@@ -53,7 +53,7 @@ describe "factory prof scenario" do
       expect(output).to include "Factories usage"
       expect(output).to include "Total: 1"
       expect(output).to include "Total top-level: 1"
-      expect(output).to match(/Total time: 0.\d{4}s/)
+      expect(output).to include "Total time: "
       expect(output).to include "Total uniq factories: 1"
 
       expect(output).to match(/total\s+top-level\s+total time\s+time per call\s+top-level time\s+name/)
@@ -72,6 +72,6 @@ describe "factory prof scenario" do
       expect(output).to include "5 examples, 0 failures"
     end
 
-    expect(File).to exist("test_prof_autopilot/factory_prof_report.json")
+    expect(File).to exist("test_prof_autopilot/factory_prof_report.html")
   end
 end

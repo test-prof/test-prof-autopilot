@@ -2,4 +2,4 @@
 
 run :factory_prof, flamegraph: true
 
-save report
+save report, format: "html"

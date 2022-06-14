@@ -1,1 +1,19 @@
-{"total_count":40,"total_top_level_count":28,"total_time":2,"total_uniq_factories":2,"stats":[{"name":"user","total_count":30,"top_level_count":18,"total_time":1,"top_level_time":1},{"name":"application","total_count":10,"top_level_count":10,"total_time":1,"top_level_time":1}]}
+{
+  "stacks": null,
+  "raw_stats": {
+    "user": {
+      "name": "user",
+      "total_count": 5,
+      "top_level_count": 5,
+      "total_time": 0.002294999547302723,
+      "top_level_time": 0.002294999547302723
+    },
+    "account": {
+      "name": "account",
+      "total_count": 4,
+      "top_level_count": 2,
+      "total_time": 0.02294999547302723,
+      "top_level_time": 0.02294999547302723
+    }
+  }
+}
