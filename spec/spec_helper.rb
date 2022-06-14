@@ -4,6 +4,8 @@ require "debug" unless ENV["CI"]
 
 require "active_support"
 require "test-prof-autopilot"
+# Load all the code
+require "test_prof/autopilot/cli"
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
 
