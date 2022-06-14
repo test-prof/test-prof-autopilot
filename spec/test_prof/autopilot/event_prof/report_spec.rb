@@ -36,14 +36,14 @@ describe TestProf::Autopilot::EventProf::Report do
   end
 
   before do
-    TestProf::Autopilot::Configuration.config.artifacts_dir = "spec/fixtures"
+    TestProf::Autopilot.config.tmp_dir = "spec/fixtures"
   end
 
   describe ".build" do
     it "builds report" do
       report = subject.build
 
-      expect(report.printer).to eq :event_prof
+      expect(report.type).to eq :event_prof
       expect(report.raw_report).to eq raw_report
     end
   end

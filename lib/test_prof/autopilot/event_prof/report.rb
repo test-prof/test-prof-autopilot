@@ -15,10 +15,10 @@ module TestProf
 
         ARTIFACT_FILE = "event_prof_report.json"
 
-        attr_reader :printer, :raw_report
+        attr_reader :type, :raw_report
 
         def initialize(raw_report)
-          @printer = :event_prof
+          @type = :event_prof
           @raw_report = raw_report
         end
 

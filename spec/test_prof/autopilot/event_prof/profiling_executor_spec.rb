@@ -15,7 +15,7 @@ describe TestProf::Autopilot::EventProf::ProfilingExecutor do
     let(:options) { {event: "factory.create"} }
 
     before do
-      TestProf::Autopilot::Configuration.config.command = "rspec"
+      TestProf::Autopilot.config.command = "rspec"
       TestProf::Autopilot::Registry.register(:event_prof_report, TestProf::Autopilot::EventProf::Report)
     end
 

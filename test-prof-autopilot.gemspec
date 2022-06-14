@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.executables = ["auto-test-prof"]
 
   s.add_runtime_dependency "test-prof", "~> 1.0"
+  s.add_runtime_dependency "stackprof", ">= 0.2.9"
 
   s.add_development_dependency "bundler", ">= 1.15"
   s.add_development_dependency "rake", ">= 13.0"
