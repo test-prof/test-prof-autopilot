@@ -1,0 +1,26 @@
+{
+  "event": "factory.create",
+  "total_time": 3.0,
+  "absolute_run_time": 4.0,
+  "total_count": 200,
+  "top_count": 10,
+  "rank_by": "time",
+  "time_percentage": 75.00,
+  "groups": [{
+    "description": "FirstModel",
+    "location": "./spec/models/first_model_spec.rb:1",
+    "time": 2.0,
+    "count": 120,
+    "examples": 10,
+    "run_time": 2.5,
+    "time_percentage": 90.0
+  }, {
+    "description": "SecondModel",
+    "location": "./spec/models/second_model_spec.rb:1",
+    "time": 1.0,
+    "count": 80,
+    "examples": 9,
+    "run_time": 1.5,
+    "time_percentage": 66.59
+  }]
+}
