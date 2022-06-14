@@ -21,6 +21,16 @@ module TestProf
           @type = :factory_prof
           @raw_report = raw_report
         end
+
+        def merge(other)
+          report = raw_report.dup
+
+          %w[total stacks].each do |field|
+            report[field] += other.raw_report[field]
+          end
+
+          Report.new(report)
+        end
       end
     end
   end

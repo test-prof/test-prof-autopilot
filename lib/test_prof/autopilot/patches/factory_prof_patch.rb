@@ -43,9 +43,8 @@ module TestProf
                   }
                 else
                   {
-                    total_stacks: result.stacks.size,
                     total: result.total_count,
-                    roots: convert_stacks(result)
+                    stacks: result.stacks
                   }
                 end
 

@@ -40,4 +40,28 @@ describe TestProf::Autopilot::FactoryProf::Report do
       expect(report.raw_report).to eq raw_report
     end
   end
+
+  describe "#merge" do
+    let(:stacks) do
+      [
+        ["user"],
+        ["user"],
+        ["job", "user"],
+        ["friend", "job", "user"],
+        ["friend", "job", "user"],
+        ["job", "user"]
+      ]
+    end
+
+    it "merges two reports" do
+      report_1 = described_class.new(JSON.parse(File.read("spec/fixtures/factory_prof_flamegraph_report.json")))
+      report_2 = described_class.new(JSON.parse(File.read("spec/fixtures/factory_prof_flamegraph_report_2.json")))
+
+      merged = report_1.merge(report_2)
+
+      expect(merged.type).to eq :factory_prof
+      expect(merged.raw_report["total"]).to eq 12
+      expect(merged.raw_report["stacks"]).to eq stacks
+    end
+  end
 end

@@ -1,0 +1,15 @@
+{
+  "total":4,
+  "stacks":[
+    [
+      "user"
+    ],
+    [
+      "user"
+    ],
+    [
+      "job",
+      "user"
+    ]
+  ]
+}
