@@ -4,6 +4,10 @@ require "test_prof/autopilot/event_prof/printer"
 require "test_prof/autopilot/event_prof/profiling_executor"
 require "test_prof/autopilot/event_prof/writer"
 
+require "test_prof/autopilot/tag_prof/printer"
+require "test_prof/autopilot/tag_prof/profiling_executor"
+require "test_prof/autopilot/tag_prof/writer"
+
 require "test_prof/autopilot/factory_prof/printer"
 require "test_prof/autopilot/factory_prof/writer"
 require "test_prof/autopilot/factory_prof/profiling_executor"

@@ -24,7 +24,7 @@ FactoryBot.define do
   end
 end
 
-describe "Something" do
+describe "Something", type: :some do
   before { FactoryBot.create(:user) }
 
   it "invokes once" do
@@ -40,7 +40,7 @@ describe "Something" do
   end
 end
 
-describe "Another something" do
+describe "Another something", type: :any do
   before { FactoryBot.create(:user) }
 
   it "do something" do
