@@ -20,10 +20,10 @@ module TestProf
           msgs <<
             <<~MSG
               EventProf results for #{result["event"]}
-  
+
               Total time: #{result["total_time"].duration} of #{result["absolute_run_time"].duration} (#{result["time_percentage"]}%)
               Total events: #{result["total_count"]}
-  
+
               Top #{result["top_count"]} slowest suites (by #{result["rank_by"]}):
             MSG
 

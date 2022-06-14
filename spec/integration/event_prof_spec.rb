@@ -54,4 +54,18 @@ describe "event prof scenario" do
       expect(output).to include "Total events: 1"
     end
   end
+
+  specify "saving report" do
+    plan = "spec/fixtures/plans/event_prof_save_report.rb"
+
+    run_command("bin/auto-test-prof --plan #{plan} --command #{command}") do |output|
+      expect(output).to include "Reading spec/fixtures/plans/event_prof_save_report.rb..."
+      expect(output).to include "Executing 'run' with profiler:event_prof and options:{:event=>\"factory.create\"}"
+      expect(output).to include "[TEST PROF INFO] EventProf enabled (factory.create)"
+
+      expect(output).to include "5 examples, 0 failures"
+
+      expect(output).to include "EventProf report saved: test_prof_autopilot/event_prof_report.json"
+    end
+  end
 end
