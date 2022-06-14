@@ -28,7 +28,7 @@ module TestProf
         def result
           @result ||= TestProf::TagProf::Result.new(raw_report["tag"], raw_report["events"]).tap do |result|
             raw_report["data"].each do |tag_data|
-              result.data[tag_data["value"]] = tag_data.transform_keys! do |key|
+              result.data[tag_data["value"]] = tag_data.transform_keys do |key|
                 SYMBOLIC_DATA_KEYS.include?(key) ? key.to_sym : key
               end
             end
@@ -36,7 +36,27 @@ module TestProf
         end
 
         def merge(other)
-          # TODO
+          raise ArgumentError, "Tags must be identical: #{raw_report["tag"]} and #{other.raw_report["tag"]}" unless raw_report["tag"] == other.raw_report["tag"]
+
+          new_report = raw_report.dup
+
+          (raw_report["data"] + other.raw_report["data"]).each_with_object({}) do |tag_data, acc|
+            if acc.key?(tag_data["value"])
+              el = acc[tag_data["value"]]
+              tag_data.each do |field, val|
+                next if field == "value"
+                next unless el.key?(field)
+
+                el[field] += val
+              end
+            else
+              acc[tag_data["value"]] = tag_data.dup
+            end
+          end.then do |new_data|
+            new_report["data"] = new_data.values
+          end
+
+          Report.new(new_report)
         end
       end
     end

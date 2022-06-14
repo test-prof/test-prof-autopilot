@@ -1,0 +1,15 @@
+{
+  "tag": "type",
+  "data": [{
+    "value": "model",
+    "count": 6,
+    "time": 30.01,
+    "sql.active_record": 3.51
+  }, {
+    "value": "job",
+    "count": 43,
+    "time": 123.63,
+    "sql.active_record": 41.65
+  }],
+  "events": ["sql.active_record"]
+}
