@@ -33,6 +33,28 @@ module TestProf
               File.write(file_path, JSON.generate(profiler_hash))
             end
           end
+
+          TestProf::FactoryProf::Printers::Flamegraph.module_eval do
+            def self.dump(result, **)
+              profiler_hash =
+                if result.raw_stats == {}
+                  {
+                    error: "No factories detected"
+                  }
+                else
+                  {
+                    total_stacks: result.stacks.size,
+                    total: result.total_count,
+                    roots: convert_stacks(result)
+                  }
+                end
+
+              dir_path = FileUtils.mkdir_p(Autopilot.config.tmp_dir)[0]
+              file_path = File.join(dir_path, ARTIFACT_FILE)
+
+              File.write(file_path, JSON.generate(profiler_hash))
+            end
+          end
         end
 
         module_function :patch

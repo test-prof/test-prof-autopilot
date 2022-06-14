@@ -18,7 +18,7 @@ module TestProf
 
         def build_env
           super.tap do |env|
-            env["FPROF"] = "1"
+            env["FPROF"] = @options[:flamegraph] ? "flamegraph" : "1"
           end
         end
       end

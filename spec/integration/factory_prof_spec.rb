@@ -60,4 +60,18 @@ describe "factory prof scenario" do
       expect(output).to match(/\s+1\s+1\s+(\d+\.\d{4}s\s+){3}user/)
     end
   end
+
+  specify "run in flamegraph mode and write" do
+    plan = "spec/fixtures/plans/factory_prof_flamegraph_save_plan.rb"
+
+    run_command("bin/auto-test-prof --plan #{plan} --command #{command}") do |output|
+      expect(output).to include "Reading spec/fixtures/plans/factory_prof_flamegraph_save_plan.rb..."
+      expect(output).to include "Executing 'run' with profiler:factory_prof and options:{:flamegraph=>true}"
+      expect(output).to include "[TEST PROF INFO] FactoryProf enabled (flamegraph mode)"
+
+      expect(output).to include "5 examples, 0 failures"
+    end
+
+    expect(File).to exist("test_prof_autopilot/factory_prof_report.json")
+  end
 end
