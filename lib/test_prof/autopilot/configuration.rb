@@ -24,8 +24,8 @@ module TestProf
 
       def initialize
         @output = $stdout
-        @tmp_dir = "tmp/test_prof_autopilot"
-        @artifacts_dir = "test_prof_autopilot"
+        @tmp_dir = ENV.fetch("TEST_PROF_AUTOPILOT_TMP_DIR", "tmp/test_prof_autopilot")
+        @artifacts_dir = ENV.fetch("TEST_PROF_AUTOPILOT_DIR", "test_prof_autopilot")
         @merge_format = "info"
       end
     end

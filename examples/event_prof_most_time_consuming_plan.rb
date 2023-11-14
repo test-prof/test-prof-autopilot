@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 run :event_prof, event: "factory.create", top_count: 1000
 
 total_run_time = report.raw_report["absolute_run_time"]

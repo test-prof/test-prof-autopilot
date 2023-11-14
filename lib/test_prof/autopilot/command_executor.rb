@@ -7,6 +7,8 @@ module TestProf
     # Module is used for commands execution in child process.
     module CommandExecutor
       def execute(env, command)
+        env.merge!("TEST_PROF_AUTOPILOT_ENABLED" => "true")
+
         Open3.popen2e(env, command) do |_stdin, stdout_and_stderr, _wait_thr|
           while (line = stdout_and_stderr.gets)
             Logging.log line

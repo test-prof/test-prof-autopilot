@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # First, profile the boot time
 run :stack_prof, boot: true, sample: 10
 
