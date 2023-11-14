@@ -1,6 +1,3 @@
-require:
-  - standard/cop/block_single_line_braces
-
 inherit_gem:
   standard: config/base.yml
 
@@ -15,11 +12,9 @@ AllCops:
     - 'gemfiles/**/*'
     - 'bench/**/*'
   DisplayCopNames: true
+  NewCops: disable
   SuggestExtensions: false
   TargetRubyVersion: 2.7
-
-Standard/BlockSingleLineBraces:
-  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: true

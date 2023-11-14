@@ -17,9 +17,16 @@ describe "auto-test-prof [options]" do
   end
 
   context "missing options" do
-    specify do
-      run_command("bin/auto-test-prof", should_fail: true) do |_output, err|
+    specify "when no inferred command" do
+      run_command("../../bin/auto-test-prof", should_fail: true, chdir: __dir__) do |_output, err|
         expect(err).to include "Test command must be specified"
+      end
+    end
+
+    specify "with inferred command" do
+      run_command("bin/auto-test-prof", should_fail: true) do |output, err|
+        expect(output).to include("No command specified, using: bundle exec rspec")
+        expect(err).to include "Plan path must be specified"
       end
     end
 

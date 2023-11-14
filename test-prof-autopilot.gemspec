@@ -18,6 +18,15 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 2.7"
   s.executables = ["auto-test-prof"]
 
+  s.metadata = {
+    "bug_tracker_uri" => "https://github.com/test-prof/test-prof-autopilot/issues",
+    "changelog_uri" => "https://github.com/test-prof/test-prof-autopilot/blob/master/CHANGELOG.md",
+    "documentation_uri" => "https://test-prof.evilmartians.io/",
+    "homepage_uri" => "https://test-prof.evilmartians.io/",
+    "source_code_uri" => "https://github.com/test-prof/test-prof-autopilot",
+    "funding_uri" => "https://github.com/sponsors/test-prof"
+  }
+
   s.add_runtime_dependency "test-prof", "~> 1.0"
 
   s.add_development_dependency "bundler", ">= 1.15"

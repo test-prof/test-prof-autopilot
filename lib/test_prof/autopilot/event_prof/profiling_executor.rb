@@ -25,6 +25,10 @@ module TestProf
         def build_env
           super.tap do |env|
             env["EVENT_PROF"] = @options[:event]
+            env["EVENT_PROF_TOP"] = @options[:top_count].to_s if @options[:top_count]
+            env["EVENT_PROF_EXAMPLES"] = "1" if @options[:per_example]
+            env["EVENT_PROF_RANK"] = @options[:rank_by].to_s if @options[:rank_by]
+            env["EVENT_PROF_STAMP"] = @options[:stamp] if @options[:stamp]
           end
         end
       end

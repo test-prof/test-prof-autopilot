@@ -13,9 +13,9 @@ module TestProf
 
       class << self
         def invoke(type, paths)
-          Logging.log "Merging #{type} reports at #{paths.join(", ")}..."
-
           paths = paths.flat_map(&Dir.method(:glob))
+
+          Logging.log "Merging #{type} reports at #{paths.join(", ")}..."
 
           new(type, paths).print_report
         end

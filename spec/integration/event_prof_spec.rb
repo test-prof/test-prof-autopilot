@@ -22,6 +22,25 @@ describe "event prof scenario" do
     end
   end
 
+  specify "with options" do
+    plan = "spec/fixtures/plans/event_prof_options_plan.rb"
+
+    run_command("bin/auto-test-prof --plan #{plan} --command #{command}") do |output|
+      expect(output).to include "Reading spec/fixtures/plans/event_prof_options_plan.rb..."
+      expect(output).to include "Executing 'run' with profiler:event_prof and options:{:event=>\"factory.create\", :top_count=>2, :rank_by=>:count}"
+      expect(output).to include "[TEST PROF INFO] EventProf enabled (factory.create)"
+
+      expect(output).to include "EventProf results for factory.create"
+
+      expect(output).to match(/Total time: 00:0\d\.\d{3} of 00:0\d\.\d{3} \(\d{1,2}\.\d+%\)/)
+      expect(output).to include "Total events: 5"
+
+      expect(output).to include "Top 2 slowest suites (by count):"
+      expect(output).to match(/Something \(\.\/spec\/fixtures\/tests\.rb:27\) – 00:00\.\d{3} \(3 \/ 3\) of 00:0\d\.\d{3} \(\d{1,2}\.\d+%\)/)
+      expect(output).to match(/Another something \(\.\/spec\/fixtures\/tests\.rb:43\) – 00:00\.\d{3} \(2 \/ 2\) of 00:0\d\.\d{3} \(\d{1,2}\.\d+%\)/)
+    end
+  end
+
   specify "run without print" do
     plan = "spec/fixtures/plans/event_prof_wo_print_plan.rb"
 
