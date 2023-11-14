@@ -2,11 +2,14 @@
 
 require "optparse"
 require "test_prof/autopilot/runner"
+require "test_prof/autopilot/logging"
 require "test_prof/autopilot/merger"
 
 module TestProf
   module Autopilot
     class CLI
+      include Logging
+
       attr_reader :command, :plan_path, :mode, :merge_type, :report_paths
 
       def run(args = ARGV)
@@ -15,6 +18,8 @@ module TestProf
         optparser.parse!(args)
 
         if mode == "runner"
+          infer_command! unless command
+
           raise "Test command must be specified. See -h for options" unless command
 
           raise "Plan path must be specified. See -h for options" unless plan_path
@@ -65,6 +70,18 @@ module TestProf
           opts.on("--merge-file=PATH", "Where to store combined report") do |val|
             Autopilot.config.merge_file = File.absolute_path?(val) ? val : File.expand_path(val)
           end
+        end
+      end
+
+      def infer_command!
+        if Dir.exist?("spec")
+          @command = "bundle exec rspec"
+        elsif Dir.exist?("test")
+          @command = "bundle exec rake test"
+        end
+
+        if @command
+          Logging.log "No command specified, using: #{@command}"
         end
       end
     end
