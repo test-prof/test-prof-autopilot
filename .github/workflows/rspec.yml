@@ -32,7 +32,7 @@ jobs:
       run: |
         bundle exec rspec
     - name: Coveralls
-      if: ${{ matrix.coverage == 'true' }}
+      if: false # ${{ matrix.coverage == 'true' }}
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.github_token }}
