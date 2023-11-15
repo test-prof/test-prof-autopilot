@@ -24,32 +24,53 @@ module TestProf
         end
 
         def merge(other)
-          f1, f2 = data[:frames], other.data[:frames]
+          ids_mapping = generate_ids_mapping(data[:frames], other.data[:frames])
 
-          frames = (f1.keys + f2.keys).uniq.each_with_object({}) do |id, hash|
-            if f1[id].nil?
-              hash[id] = f2[id]
-            elsif f2[id]
-              hash[id] = f1[id]
-              hash[id][:total_samples] += f2[id][:total_samples]
-              hash[id][:samples] += f2[id][:samples]
-              if f2[id][:edges]
-                edges = hash[id][:edges] ||= {}
-                f2[id][:edges].each do |edge, weight|
-                  edges[edge] ||= 0
-                  edges[edge] += weight
+          frames = data[:frames].dup
+
+          other.data[:frames].each do |id, new_frame|
+            frame =
+              if ids_mapping[id]
+                frames[ids_mapping[id]]
+              else
+                frames[id] = empty_frame_from(new_frame)
+              end
+
+            frame[:total_samples] += new_frame[:total_samples]
+            frame[:samples] += new_frame[:samples]
+
+            if new_frame[:edges]
+              edges = (frame[:edges] ||= {})
+
+              new_frame[:edges].each do |edge, weight|
+                old_edge = ids_mapping[edge]
+
+                if edges[old_edge]
+                  edges[old_edge] += weight
+                else
+                  edges[old_edge] = weight
                 end
               end
-              if f2[id][:lines]
-                lines = hash[id][:lines] ||= {}
-                f2[id][:lines].each do |line, weight|
-                  lines[line] = add_lines(lines[line], weight)
-                end
-              end
-            else
-              hash[id] = f1[id]
             end
-            hash
+
+            if new_frame[:lines]
+              lines = (frame[:lines] ||= {})
+
+              new_frame[:lines].each do |line, weight|
+                old_line = ids_mapping[line]
+
+                lines[old_line] =
+                  if lines[old_line]
+                    add_lines(lines[old_line], weight)
+                  else
+                    weight
+                  end
+              end
+            end
+          end
+
+          converted_raw = other.data[:raw].map do |raw|
+            ids_mapping[raw] || raw
           end
 
           d1, d2 = data, other.data
@@ -62,11 +83,37 @@ module TestProf
             missed_samples: d1[:missed_samples] + d2[:missed_samples],
             metadata: d1[:metadata].merge(d2[:metadata]),
             frames: frames,
-            raw: d1[:raw] + d2[:raw],
+            raw: d1[:raw] + converted_raw,
             raw_timestamp_deltas: d1[:raw_timestamp_deltas] + d2[:raw_timestamp_deltas]
           }
 
           self.class.new(data)
+        end
+
+        def generate_ids_mapping(frames, other_frames)
+          old_fingerprints = frames_to_fingerprints(frames)
+          new_fingerprints = frames_to_fingerprints(other_frames)
+
+          new_fingerprints.each_with_object({}) do |(fingerprint, frame), hash|
+            next hash unless old_fingerprints[fingerprint]
+
+            hash[frame[:id]] = old_fingerprints[fingerprint][:id]
+          end
+        end
+
+        def frames_to_fingerprints(frames)
+          frames.each_with_object({}) do |(id, frame), hash|
+            fingerprint = [frame[:name], frame[:file], frame[:line]].compact.map(&:to_s).join("/")
+            hash[fingerprint] = frame.merge(id: id)
+            hash
+          end
+        end
+
+        def empty_frame_from(frame)
+          frame.slice(:name, :file, :line).merge(
+            total_samples: 0,
+            samples: 0
+          )
         end
       end
     end
