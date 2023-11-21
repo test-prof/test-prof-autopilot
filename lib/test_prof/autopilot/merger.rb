@@ -13,7 +13,7 @@ module TestProf
 
       class << self
         def invoke(type, paths)
-          paths = paths.flat_map(&Dir.method(:glob))
+          paths = paths.flat_map(&Dir.method(:glob)).sort!
 
           Logging.log "Merging #{type} reports at #{paths.join(", ")}..."
 
