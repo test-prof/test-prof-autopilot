@@ -16,7 +16,7 @@ module TestProf
 
         def initialize(data)
           @type = :stack_prof
-          super(data)
+          super
         end
 
         def self.build
