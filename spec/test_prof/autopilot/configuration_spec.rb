@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "spec_helper"
+
 describe TestProf::Autopilot::Configuration do
   subject { described_class.new }
 

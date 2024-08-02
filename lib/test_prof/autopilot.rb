@@ -9,5 +9,6 @@ if ENV["TEST_PROF_AUTOPILOT_ENABLED"] == "true"
   require "test_prof/autopilot/patches/event_prof_patch"
   require "test_prof/autopilot/patches/tag_prof_patch"
   require "test_prof/autopilot/patches/factory_prof_patch"
+  require "test_prof/autopilot/patches/factory_default_patch"
   require "test_prof/autopilot/patches/stack_prof_patch"
 end

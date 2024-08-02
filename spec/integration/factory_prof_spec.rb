@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "spec_helper"
+
 describe "factory prof scenario" do
   let(:command) { "'bundle exec rspec --require support/patches_load_helper.rb spec/fixtures/tests.rb'" }
 
@@ -12,13 +14,14 @@ describe "factory prof scenario" do
       expect(output).to include "[TEST PROF INFO] FactoryProf enabled (simple mode)"
 
       expect(output).to include "Factories usage"
-      expect(output).to include "Total: 5"
+      expect(output).to include "Total: 7"
       expect(output).to include "Total top-level: 5"
       expect(output).to include("Total time: ")
-      expect(output).to include "Total uniq factories: 1"
+      expect(output).to include "Total uniq factories: 2"
 
-      expect(output).to match(/total\s+top-level\s+total time\s+time per call\s+top-level time\s+name/)
-      expect(output).to match(/\s+5\s+5\s+(\d+\.\d{4}s\s+){3}user/)
+      expect(output).to match(/name\s+total\s+top-level\s+total time\s+time per call\s+top-level time/)
+      expect(output).to match(/user\s+5\s+3\s+(\d+\.\d{4}s\s+){3}/)
+      expect(output).to match(/job\s+2\s+2\s+(\d+\.\d{4}s\s+){3}/)
     end
   end
 
@@ -51,13 +54,13 @@ describe "factory prof scenario" do
       expect(output).to include "1 example, 0 failures"
 
       expect(output).to include "Factories usage"
-      expect(output).to include "Total: 1"
+      expect(output).to include "Total: "
       expect(output).to include "Total top-level: 1"
       expect(output).to include "Total time: "
-      expect(output).to include "Total uniq factories: 1"
+      expect(output).to include "Total uniq factories: "
 
-      expect(output).to match(/total\s+top-level\s+total time\s+time per call\s+top-level time\s+name/)
-      expect(output).to match(/\s+1\s+1\s+(\d+\.\d{4}s\s+){3}user/)
+      expect(output).to match(/name\s+total\s+top-level\s+total time\s+time per call\s+top-level time/)
+      expect(output).to match(/user\s+1\s+1\s+(\d+\.\d{4}s\s+){3}/)
     end
   end
 

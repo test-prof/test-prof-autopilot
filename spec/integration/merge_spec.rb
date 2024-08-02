@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "spec_helper"
+
 describe "merge reports" do
   specify "run and print" do
     reports_glob = "spec/fixtures/event_prof_report*.json"

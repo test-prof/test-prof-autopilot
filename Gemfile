@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "debug", platform: :mri
 gem "factory_bot"
+gem "test-prof"
 
 gemspec
 

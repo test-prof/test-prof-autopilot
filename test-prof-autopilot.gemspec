@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
     "funding_uri" => "https://github.com/sponsors/test-prof"
   }
 
-  s.add_runtime_dependency "test-prof", "~> 1.0"
+  s.add_runtime_dependency "test-prof", "> 1.3.100", "< 1.5.0"
 
   s.add_development_dependency "bundler", ">= 1.15"
   s.add_development_dependency "rake", ">= 13.0"

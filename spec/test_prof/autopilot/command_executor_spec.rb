@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "spec_helper"
+
 require "test_prof/autopilot/command_executor"
 
 describe TestProf::Autopilot::CommandExecutor do

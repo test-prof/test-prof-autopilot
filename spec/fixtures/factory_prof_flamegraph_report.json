@@ -14,14 +14,16 @@
       "total_count": 5,
       "top_level_count": 5,
       "total_time": 0.0022159996442496777,
-      "top_level_time": 0.0022159996442496777
+      "top_level_time": 0.0022159996442496777,
+      "variations": {}
     },
     "account": {
       "name": "account",
       "total_count": 4,
       "top_level_count": 2,
       "total_time": 0.02294999547302723,
-      "top_level_time": 0.02294999547302723
+      "top_level_time": 0.02294999547302723,
+      "variations": {}
     }
   }
 }

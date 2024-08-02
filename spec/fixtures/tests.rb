@@ -7,7 +7,7 @@ class User
 end
 
 class Job
-  attr_accessor :title
+  attr_accessor :title, :user
 end
 
 FactoryBot.define do
@@ -41,7 +41,7 @@ describe "Something", type: :some do
 end
 
 describe "Another something", type: :any do
-  before { FactoryBot.create(:user) }
+  before { FactoryBot.create(:job) }
 
   it "do something" do
     expect(true).to eq true

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "spec_helper"
+
 require "test_prof/autopilot/factory_prof/profiling_executor"
 
 describe TestProf::Autopilot::FactoryProf::ProfilingExecutor do

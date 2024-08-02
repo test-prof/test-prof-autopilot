@@ -85,6 +85,7 @@ Currently, Autopilot supports the following Test Prof profilers:
 - [TagProf](https://test-prof.evilmartians.io/profilers/tag_prof) (as `:tag_prof`)
 - [StackProf](https://test-prof.evilmartians.io/profilers/stack_prof) (as `:stack_prof`)
 - [FactoryProf](https://test-prof.evilmartians.io/profilers/factory_prof) (as `:factory_prof`)
+- [FactoryDefault profiler](https://test-prof.evilmartians.io/recipes/factory_default) (as `:factory_default_prof`)
 
 ## Installation
 

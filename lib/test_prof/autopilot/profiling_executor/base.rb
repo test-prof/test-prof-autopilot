@@ -4,6 +4,7 @@ require "test_prof/autopilot/command_executor"
 require "test_prof/autopilot/event_prof/report"
 require "test_prof/autopilot/tag_prof/report"
 require "test_prof/autopilot/factory_prof/report"
+require "test_prof/autopilot/factory_default/report"
 require "test_prof/autopilot/stack_prof/report"
 
 module TestProf

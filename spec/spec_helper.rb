@@ -41,7 +41,7 @@ RSpec.configure do |config|
       TestProf::Autopilot::Registry.instance_variable_defined?(:@items)
   end
 
-  config.after(:all) do
+  config.after(:suite) do
     FileUtils.rm_rf("test_prof_autopilot")
     FileUtils.rm_rf("tmp/test_prof_autopilot")
   end
