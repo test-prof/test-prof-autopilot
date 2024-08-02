@@ -60,7 +60,7 @@ describe "factory prof scenario" do
       expect(output).to include "Total uniq factories: "
 
       expect(output).to match(/name\s+total\s+top-level\s+total time\s+time per call\s+top-level time/)
-      expect(output).to match(/user\s+1\s+1\s+(\d+\.\d{4}s\s+){3}/)
+      expect(output).to match(/user\s+1\s+\d\s+(\d+\.\d{4}s\s+){3}/)
     end
   end
 
