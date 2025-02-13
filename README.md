@@ -3,6 +3,8 @@
 
 # TestProf Autopilot
 
+> 📖 Read also the ["TestProf III: guided and automated Ruby test profiling" blog post](https://evilmartians.com/chronicles/test-prof-3-guided-and-automated-ruby-test-profiling).
+
 [TestProf][] has been used by many Ruby/Rails teams to optimize their test suites performance for a while.
 
 Usually, it takes a decent amount of time to profile the test suite initially: we need run many profilers multiple times, tune configuration and sampling parameters. And we repeat this over and over again.
